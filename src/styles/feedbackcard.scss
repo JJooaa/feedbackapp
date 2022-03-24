@@ -1,0 +1,44 @@
+.feedbackcard {
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    height: 200px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 13px;
+    h1 {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: -0.18px;
+        color: #3a4374;
+    }
+    .category {
+        width: fit-content;
+        border-radius: 10px;
+        background: #f2f4ff;
+        padding: 5px 15px;
+        h2 {
+            font-size: 13px;
+            display: block;
+            color: #4661e6;
+        }
+    }
+    .data {
+        display: flex;
+        justify-content: space-between;
+        height: 32px;
+        align-items: center;
+        &:first-child {
+            background-color: red;
+        }
+    }
+    .info-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        color: #3a4374;
+    }
+}

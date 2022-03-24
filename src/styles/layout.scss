@@ -1,0 +1,52 @@
+.header {
+    width: 100%;
+    display: flex;
+    background-image: url("../assets/suggestions/mobile/background-header.png");
+    background-repeat: inherit;
+    height: 72px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: white;
+        h1,
+        h2 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+    }
+}
+
+.secondheader {
+    width: 100%;
+    height: 56px;
+    background-color: #373f68;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+
+.feedback-button {
+    width: 134px;
+    height: 40px;
+    background-color: #ad1fea;
+    border-radius: 10px;
+    border: none;
+    color: white;
+}
+
+.main {
+    max-width: 100%;
+    margin: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

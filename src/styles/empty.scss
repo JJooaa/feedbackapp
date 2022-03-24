@@ -1,0 +1,27 @@
+.empty-container {
+    width: 100%;
+    height: 436px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    gap: 40px;
+    border-radius: 10px;
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    h1 {
+        font-size: 18px;
+        color: #3a4374;
+    }
+    p {
+        font-size: 13px;
+        text-align: center;
+        color: #647196;
+    }
+}
