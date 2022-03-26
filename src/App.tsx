@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Feedbacks from "./pages/Suggestions";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
