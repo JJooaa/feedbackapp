@@ -9,7 +9,6 @@ interface User {
 
 interface Props {
     index: number;
-    image: string;
     item: {
         id: number;
         content: string;
@@ -18,12 +17,13 @@ interface Props {
     };
 }
 
-const SingleComment = ({ index, image, item }: Props) => {
+const SingleComment = ({ index, item }: Props) => {
     const [isReplying, setIsReplying] = useState<boolean>(false);
 
     const handleReplyClick = (): void => {
         setIsReplying((prevState) => !prevState);
     };
+    const image = item.user.image.slice(21, item.user.image.length);
 
     return (
         <div key={index} className="comment-container">

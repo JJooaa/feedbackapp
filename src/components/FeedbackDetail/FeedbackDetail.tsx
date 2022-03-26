@@ -9,12 +9,11 @@ import Comment from "../Comments/CommentList";
 
 const FeedbackDetail = () => {
     const { id } = useParams();
-    const [item, setItem] = useState<any>();
+    const [item, setItem] = useState<any>(null);
 
     const getItemWithId = useCallback(async () => {
-        let item = data.productRequests.filter(
-            (item) => item.id === Number(id)
-        );
+        let item = data.productRequests.filter((item) => item.id === Number(id));
+        console.log(item);
         return item;
     }, [id]);
 

@@ -1,3 +1,4 @@
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import "../../styles/commentList.scss";
 import Button from "../Button/Button";
 import SingleComment from "./SingleComment";
@@ -17,26 +18,24 @@ interface Props {
 }
 
 const CommentList = ({ comment }: Props) => {
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
+    const [state, setState] = useState<number>(0);
+
+    const handleValueChange = (): void => {
+        if (textAreaRef.current?.value.length !== undefined) {
+            setState(textAreaRef.current?.value.length);
+        }
+    };
+
+    console.log(state);
     return (
         <>
             <div className="comments-wrapper">
                 <h1>{comment && comment.length} Comments</h1>
                 {comment &&
-                    comment.map((item, index) => {
-                        console.log(item);
-                        const image = item.user.image.slice(
-                            21,
-                            item.user.image.length
-                        );
-                        return (
-                            <SingleComment
-                                key={index}
-                                index={index}
-                                item={item}
-                                image={image}
-                            />
-                        );
-                    })}
+                    comment.map((item, index) => (
+                        <SingleComment key={index} index={index} item={item} />
+                    ))}
             </div>
             <div className="leave-comment-container">
                 <h2>Add Comment</h2>
@@ -44,9 +43,12 @@ const CommentList = ({ comment }: Props) => {
                     name=""
                     id=""
                     placeholder="Type your comment here"
+                    maxLength={250}
+                    ref={textAreaRef}
+                    onChange={handleValueChange}
                 ></textarea>
                 <div>
-                    <p>250 Characters left</p>
+                    <p>{250 - state}</p>
                     <Button text="Post Comment" color="#AD1FEA" />
                 </div>
             </div>

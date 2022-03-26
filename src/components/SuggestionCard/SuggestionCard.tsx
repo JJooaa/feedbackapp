@@ -11,6 +11,7 @@ interface Props {
         category: string;
         upvotes: number;
         comments: object[];
+        status: string;
         id: number;
     };
 }
