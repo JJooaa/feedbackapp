@@ -5,7 +5,6 @@ import React from "react";
 import Empty from "../components/Empty/Empty";
 
 const Feedbacks: React.FC = () => {
-    console.log(data.productRequests.map((item) => item));
     return (
         <Layout>
             {data.productRequests.length !== 0 ? (

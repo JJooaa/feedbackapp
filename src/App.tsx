@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Feedbacks from "./pages/Suggestions";
+import Feedbacks from "./pages/Feedbacks";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FeedbackDetail from "./components/FeedbackDetail/FeedbackDetail";
 

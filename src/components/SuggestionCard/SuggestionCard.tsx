@@ -26,8 +26,6 @@ const SuggestionCard: React.FC<Props> = ({ item }) => {
         return [firstLetter, ...array.slice(1, array.length)].join("");
     };
 
-    if (!item) return <div>Feedback id not found...</div>;
-
     return (
         <div className="feedbackcard">
             <Link className="card-link" to={`/feedbacks/${item.id}`}>

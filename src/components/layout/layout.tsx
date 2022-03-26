@@ -27,7 +27,7 @@ const Layout: React.FC = ({ children }) => {
             </header>
             <div className="secondheader">
                 <p>Sort by :</p>
-                <Button text="+ Add Feedback" />
+                <Button text="+ Add Feedback" color="#AD1FEA" />
             </div>
             <main className="main">{children}</main>
             {isMenuOpen && <Menu />}

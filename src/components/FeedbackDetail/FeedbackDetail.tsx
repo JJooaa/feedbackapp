@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import data from "../../data.json";
 import { Link, useParams } from "react-router-dom";
-import Comment from "../Comment/Comment";
+import Comment from "../Comments/CommentList";
 
 const FeedbackDetail = () => {
     const { id } = useParams();
@@ -26,7 +26,7 @@ const FeedbackDetail = () => {
         getItem();
     }, [getItemWithId]);
 
-    if (!item) return <main className="main">Loading...</main>;
+    if (!item) return <main className="main">Boggedasda</main>;
 
     return (
         <>
@@ -37,7 +37,7 @@ const FeedbackDetail = () => {
                         Go Back
                     </Link>
                 </div>
-                <Button text="Edit Feedback" />
+                <Button text="Edit Feedback" color="#4661E6" />
             </header>
             <main className="main">
                 <SuggestionCard item={item[0]} />

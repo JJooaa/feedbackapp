@@ -4,10 +4,12 @@
     background: white;
     border-radius: 10px;
     display: flex;
+    padding: 24px 0px;
     flex-direction: column;
     h1 {
         align-self: flex-start;
-        margin: 24px;
+        margin-left: 24px;
+        margin-bottom: 12px;
         font-size: 18px;
         color: #3a4374;
     }
@@ -50,10 +52,30 @@
         align-items: center;
         justify-content: space-between;
     }
+    .user-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
 }
 
-.user-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.leave-comment-container {
+    width: 100%;
+    background: white;
+    padding: 24px;
+    border-radius: 10px;
+    h2 {
+        font-size: 18px;
+        color: #3a4374;
+        margin-bottom: 24px;
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+            font-size: 13px;
+        }
+    }
 }

@@ -13,7 +13,7 @@ const Empty: React.FC = () => {
                     Got a suggestion? Found a bug that needs to be squashed? We
                     love hearing about new ideas to improve our app.
                 </p>
-                <Button text="+ Add Feedback"/>
+                <Button text="+ Add Feedback" color="red"/>
             </div>
         </div>
     );

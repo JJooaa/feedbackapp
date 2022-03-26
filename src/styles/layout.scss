@@ -34,6 +34,17 @@
     position: relative;
 }
 
+textarea {
+    resize: none;
+    width: 100%;
+    min-height: 80px;
+    padding: 16px;
+    background: #f7f8fd;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    outline-color: #4661e6;
+}
 .feedback-button {
     width: 134px;
     height: 40px;
@@ -41,6 +52,7 @@
     border-radius: 10px;
     border: none;
     color: white;
+    font-weight: bold;
 }
 
 .main {
