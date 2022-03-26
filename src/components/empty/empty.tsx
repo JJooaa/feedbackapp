@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/empty.scss";
 import emptyIcon from "../../assets/suggestions/illustration-empty.svg";
-import AddButton from "../addbutton/addbutton";
+import Button from "../Button/Button";
 
 const Empty: React.FC = () => {
     return (
@@ -13,7 +13,7 @@ const Empty: React.FC = () => {
                     Got a suggestion? Found a bug that needs to be squashed? We
                     love hearing about new ideas to improve our app.
                 </p>
-                <AddButton />
+                <Button text="+ Add Feedback"/>
             </div>
         </div>
     );

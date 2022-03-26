@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../../styles/layout.scss";
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
-import Menu from "../menu/menu";
+import Menu from "../Menu/Menu";
 import close from "../../assets/shared/mobile/icon-close.svg";
-import AddButton from "../addbutton/addbutton";
+import Button from "../Button/Button";
 
 const Layout: React.FC = ({ children }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,7 +27,7 @@ const Layout: React.FC = ({ children }) => {
             </header>
             <div className="secondheader">
                 <p>Sort by :</p>
-                <AddButton />
+                <Button text="+ Add Feedback" />
             </div>
             <main className="main">{children}</main>
             {isMenuOpen && <Menu />}

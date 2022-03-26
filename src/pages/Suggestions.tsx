@@ -1,15 +1,16 @@
-import FeedBackCard from "../components/feedbackcard/feedbackcard";
+import SuggestionCard from "../components/SuggestionCard/SuggestionCard";
 import data from "../data.json";
-import Layout from "../components/layout/layout";
+import Layout from "../components/Layout/Layout";
 import React from "react";
-import Empty from "../components/empty/empty";
+import Empty from "../components/Empty/Empty";
 
 const Feedbacks: React.FC = () => {
+    console.log(data.productRequests.map((item) => item));
     return (
         <Layout>
             {data.productRequests.length !== 0 ? (
                 data.productRequests.map((item: any, index: number) => (
-                    <FeedBackCard key={index} item={item} />
+                    <SuggestionCard key={index} item={item} />
                 ))
             ) : (
                 <Empty />

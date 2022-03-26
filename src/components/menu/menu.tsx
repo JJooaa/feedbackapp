@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/menu.scss";
+import { Link } from "react-router-dom";
 
 const Menu: React.FC = () => {
     return (
@@ -16,7 +17,7 @@ const Menu: React.FC = () => {
                 <div className="roadmap">
                     <div className="link-wrapper">
                         <h1>Roadmap</h1>
-                        <a href="/view">View</a>
+                        <Link to="/roadmap">View</Link>
                     </div>
                     <ul className="roadmap-status">
                         <li>

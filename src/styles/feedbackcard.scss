@@ -8,11 +8,13 @@
     flex-direction: column;
     justify-content: space-between;
     font-size: 13px;
-    h1 {
+    .card-link {
         font-size: 13px;
         font-weight: 700;
         letter-spacing: -0.18px;
         color: #3a4374;
+        text-decoration: none;
+        cursor: pointer;
     }
     .category {
         width: fit-content;

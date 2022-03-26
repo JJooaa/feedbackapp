@@ -1,10 +1,19 @@
 import React from "react";
 import "./App.css";
-import Layout from "./components/layout/layout";
-import Feedbacks from "./pages/feedbacks";
+import Feedbacks from "./pages/Suggestions";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import FeedbackDetail from "./components/FeedbackDetail/FeedbackDetail";
 
-function App() {
-    return <Feedbacks />
-}
+const App: React.FC = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/feedbacks" element={<Feedbacks />} />
+                <Route path="/feedbacks/:id" element={<FeedbackDetail />} />
+                <Route path="*" element={<div>Not found</div>} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;

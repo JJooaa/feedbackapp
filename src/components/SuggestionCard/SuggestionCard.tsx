@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/feedbackcard.scss";
 import upArrow from "../../assets/shared/icon-arrow-up.svg";
 import commentsIcon from "../../assets/shared/icon-comments.svg";
+import { Link } from "react-router-dom";
 
 interface Props {
     item: {
@@ -10,24 +11,28 @@ interface Props {
         category: string;
         upvotes: number;
         comments: object[];
-        id?: number;
+        id: number;
     };
 }
 
-const FeedBackCard: React.FC<Props> = ({ item }) => {
-    const returnCommentsLength = (commentsArray: object[]) => {
+const SuggestionCard: React.FC<Props> = ({ item }) => {
+    const returnCommentsLength = (commentsArray: object[]): number => {
         return commentsArray === undefined ? 0 : commentsArray.length;
     };
 
-    const firstLetterToUpperCase = (data: string) => {
+    const firstLetterToUpperCase = (data: string): string => {
         let array = data.split("");
         let firstLetter = array[0].toUpperCase();
         return [firstLetter, ...array.slice(1, array.length)].join("");
     };
 
+    if (!item) return <div>Feedback id not found...</div>;
+
     return (
         <div className="feedbackcard">
-            <h1>{item.title}</h1>
+            <Link className="card-link" to={`/feedbacks/${item.id}`}>
+                {item.title}
+            </Link>
             <p>{item.description}</p>
             <div className="category">
                 <h2>{firstLetterToUpperCase(item.category)}</h2>
@@ -46,4 +51,4 @@ const FeedBackCard: React.FC<Props> = ({ item }) => {
     );
 };
 
-export default FeedBackCard;
+export default SuggestionCard;
