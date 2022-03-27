@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import "../../styles/commentList.scss";
 import Button from "../Button/Button";
+import PostComment from "./PostComment";
 import SingleComment from "./SingleComment";
 
 interface User {
@@ -18,16 +19,6 @@ interface Props {
 }
 
 const CommentList = ({ comment }: Props) => {
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    const [state, setState] = useState<number>(0);
-
-    const handleValueChange = (): void => {
-        if (textAreaRef.current?.value.length !== undefined) {
-            setState(textAreaRef.current?.value.length);
-        }
-    };
-
-    console.log(state);
     return (
         <>
             <div className="comments-wrapper">
@@ -37,21 +28,7 @@ const CommentList = ({ comment }: Props) => {
                         <SingleComment key={index} index={index} item={item} />
                     ))}
             </div>
-            <div className="leave-comment-container">
-                <h2>Add Comment</h2>
-                <textarea
-                    name=""
-                    id=""
-                    placeholder="Type your comment here"
-                    maxLength={250}
-                    ref={textAreaRef}
-                    onChange={handleValueChange}
-                ></textarea>
-                <div>
-                    <p>{250 - state}</p>
-                    <Button text="Post Comment" color="#AD1FEA" />
-                </div>
-            </div>
+            <PostComment />
         </>
     );
 };

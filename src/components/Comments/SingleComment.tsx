@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PostReply from "../PostReply/PostReply";
+import PostReply from "./PostReply";
 
 interface User {
     username: string;
@@ -23,7 +23,7 @@ const SingleComment = ({ index, item }: Props) => {
     const handleReplyClick = (): void => {
         setIsReplying((prevState) => !prevState);
     };
-    const image = item.user.image.slice(21, item.user.image.length);
+    const image: string = item.user.image.slice(21, item.user.image.length);
 
     return (
         <div key={index} className="comment-container">
