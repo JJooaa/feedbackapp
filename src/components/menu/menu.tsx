@@ -2,17 +2,36 @@ import React from "react";
 import "../../styles/menu.scss";
 import { Link } from "react-router-dom";
 
-const Menu: React.FC = () => {
+interface Props {
+    filteredData: {}[];
+}
+const Menu: React.FC<Props> = ({ filteredData }) => {
+    const features: Array<string> = [
+        "All",
+        "UI",
+        "UX",
+        "Enchancement",
+        "Bug",
+        "Feature",
+    ];
+
+    const planned = filteredData.filter(
+        (item: { status?: string }) => item.status === "planned"
+    );
+    const inProgress = filteredData.filter(
+        (item: { status?: string }) => item.status === "in-progress"
+    );
+    const live = filteredData.filter(
+        (item: { status?: string }) => item.status === "live"
+    );
+
     return (
         <div className="wrapper">
             <nav>
                 <ul className="features-ul">
-                    <li>All</li>
-                    <li>UI</li>
-                    <li>UX</li>
-                    <li>Enhancement</li>
-                    <li>Bug</li>
-                    <li>Feature</li>
+                    {features.map((item: string, index: number) => (
+                        <li key={index}>{item}</li>
+                    ))}
                 </ul>
                 <div className="roadmap">
                     <div className="link-wrapper">
@@ -21,14 +40,14 @@ const Menu: React.FC = () => {
                     </div>
                     <ul className="roadmap-status">
                         <li>
-                            Planned<span>1</span>
+                            Planned<span>{planned.length}</span>
                         </li>
 
                         <li>
-                            In-progress<span>2</span>
+                            In-progress<span>{inProgress.length}</span>
                         </li>
                         <li>
-                            Live<span>3</span>
+                            Live<span>{live.length}</span>
                         </li>
                     </ul>
                 </div>

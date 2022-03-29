@@ -1,6 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import "../../styles/commentList.scss";
-import Button from "../Button/Button";
 import PostComment from "./PostComment";
 import SingleComment from "./SingleComment";
 
@@ -22,7 +20,7 @@ const CommentList = ({ comment }: Props) => {
     return (
         <>
             <div className="comments-wrapper">
-                <h1>{comment && comment.length} Comments</h1>
+                <h1>{comment ? comment.length : 0} Comments</h1>
                 {comment &&
                     comment.map((item, index) => (
                         <SingleComment key={index} index={index} item={item} />

@@ -8,6 +8,7 @@
     flex-direction: column;
     justify-content: space-between;
     font-size: 13px;
+    
     .card-link {
         font-size: 13px;
         font-weight: 700;
@@ -16,26 +17,31 @@
         text-decoration: none;
         cursor: pointer;
     }
+    
     .category {
         width: fit-content;
         border-radius: 10px;
         background: #f2f4ff;
         padding: 5px 15px;
+        
         h2 {
             font-size: 13px;
             display: block;
             color: #4661e6;
         }
     }
+    
     .data {
         display: flex;
         justify-content: space-between;
         height: 32px;
         align-items: center;
+        
         &:first-child {
             background-color: red;
         }
     }
+    
     .info-container {
         display: flex;
         align-items: center;

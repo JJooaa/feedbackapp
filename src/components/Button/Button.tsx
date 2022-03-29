@@ -1,13 +1,20 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     text: string;
     color: string;
+    link: string;
 }
 
-const Button = ({ text, color }: Props) => {
+const Button = ({ text, color, link }: Props) => {
+    let navigate = useNavigate();
+    console.log(link);
     return (
-        <button style={{ backgroundColor: color }} className="feedback-button">
+        <button
+            onClick={() => navigate(link, { replace: true })}
+            style={{ backgroundColor: color }}
+            className="feedback-button"
+        >
             {text}
         </button>
     );

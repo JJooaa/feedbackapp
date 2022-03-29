@@ -24,7 +24,11 @@ const PostComment = (): JSX.Element => {
             ></textarea>
             <div>
                 <p>{250 - state} characters left</p>
-                <Button text="Post Comment" color="#AD1FEA" />
+                <Button
+                    text="Post Comment"
+                    color="#AD1FEA"
+                    link="feedbacks/create"
+                />
             </div>
         </div>
     );
