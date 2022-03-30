@@ -1,4 +1,4 @@
-import "../../styles/empty.scss";
+import "./empty.scss";
 import emptyIcon from "../../assets/suggestions/illustration-empty.svg";
 import Button from "../Button/Button";
 

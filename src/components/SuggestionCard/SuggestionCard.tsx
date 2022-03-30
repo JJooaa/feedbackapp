@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/feedbackcard.scss";
+import "./suggestioncard.scss";
 import upArrow from "../../assets/shared/icon-arrow-up.svg";
 import commentsIcon from "../../assets/shared/icon-comments.svg";
 import { Link } from "react-router-dom";

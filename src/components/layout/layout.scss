@@ -1,7 +1,7 @@
 .header {
     width: 100%;
     display: flex;
-    background-image: url("../assets/suggestions/mobile/background-header.png");
+    background-image: url("../../assets/suggestions/mobile/background-header.png");
     background-repeat: inherit;
     height: 72px;
     padding: 16px 24px;
@@ -80,20 +80,6 @@
     }
     .arrow {
         filter: brightness(0) invert(1);
-    }
-}
-
-.feedback-button {
-    width: 134px;
-    height: 40px;
-    background-color: #ad1fea;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    font-weight: 600px;
-
-    &:hover {
-        opacity: 0.7;
     }
 }
 

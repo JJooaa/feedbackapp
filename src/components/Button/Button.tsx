@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import "./button.scss";
 interface Props {
     text: string;
     color: string;
@@ -9,6 +9,7 @@ interface Props {
 const Button = ({ text, color, link }: Props) => {
     let navigate = useNavigate();
     console.log(link);
+
     return (
         <button
             onClick={() => navigate(link, { replace: true })}

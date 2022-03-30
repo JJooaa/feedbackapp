@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/layout.scss";
+import "./layout.scss";
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import Menu from "../Menu/Menu";
 import close from "../../assets/shared/mobile/icon-close.svg";
@@ -7,6 +7,7 @@ import Button from "../Button/Button";
 import { ReactComponent as DownArrow } from "../../assets/shared/icon-arrow-down.svg";
 import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
 import checkIcon from "../../assets/shared/icon-check.svg";
+
 interface Props {
     staticData: {}[];
     setFilteredData: React.Dispatch<React.SetStateAction<{}[]>>;

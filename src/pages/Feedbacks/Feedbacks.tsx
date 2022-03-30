@@ -1,8 +1,8 @@
-import SuggestionCard from "../components/SuggestionCard/SuggestionCard";
-import data from "../data.json";
-import Layout from "../components/Layout/Layout";
+import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
+import data from "../../data.json";
+import Layout from "../../components/Layout/Layout";
 import { useState } from "react";
-import Empty from "../components/Empty/Empty";
+import Empty from "../../components/Empty/Empty";
 
 const Feedbacks = () => {
     const staticData = data.productRequests;

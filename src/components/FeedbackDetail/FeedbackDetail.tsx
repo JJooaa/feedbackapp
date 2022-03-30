@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import SuggestionCard from "../SuggestionCard/SuggestionCard";
-import "../../styles/feedbackdetail.scss";
+import "./feedbackdetail.scss";
 import Button from "../Button/Button";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import data from "../../data.json";

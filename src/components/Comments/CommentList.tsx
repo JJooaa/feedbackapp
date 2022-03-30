@@ -1,4 +1,4 @@
-import "../../styles/commentList.scss";
+import "./comments.scss";
 import PostComment from "./PostComment";
 import SingleComment from "./SingleComment";
 

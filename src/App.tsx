@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import Feedbacks from "./pages/Feedbacks";
+import Feedbacks from "./pages/Feedbacks/Feedbacks";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FeedbackDetail from "./components/FeedbackDetail/FeedbackDetail";
-import CreateFeedBack from "./pages/CreateFeedBack";
+import CreateFeedBack from "./pages/CreateFeedBack/CreateFeedBack";
 
 const App: React.FC = () => {
     return (

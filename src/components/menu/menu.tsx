@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/menu.scss";
+import "./menu.scss";
 import { Link } from "react-router-dom";
 
 interface Props {
