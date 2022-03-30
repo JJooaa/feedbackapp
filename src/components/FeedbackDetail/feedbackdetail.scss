@@ -1,25 +1,25 @@
 .feedback-header {
-    padding: 24px;
+  padding: 24px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  .go-back {
     display: flex;
-    width: 100%;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
 
-    .go-back {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        .detail-back {
-            color: #647196;
-            font-size: 13px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        img {
-            height: 10px;
-            width: 6px;
-        }
+    .detail-back {
+      color: #647196;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
     }
+
+    img {
+      height: 10px;
+      width: 6px;
+    }
+  }
 }

@@ -1,24 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import "./button.scss";
 interface Props {
-    text: string;
-    color: string;
-    link: string;
+  text: string;
+  color: string;
+  link: string;
 }
 
 const Button = ({ text, color, link }: Props) => {
-    let navigate = useNavigate();
-    console.log(link);
+  let navigate = useNavigate();
+  console.log(link);
 
-    return (
-        <button
-            onClick={() => navigate(link, { replace: true })}
-            style={{ backgroundColor: color }}
-            className="feedback-button"
-        >
-            {text}
-        </button>
-    );
+  return (
+    <button
+      onClick={() => navigate(link, { replace: true })}
+      style={{ backgroundColor: color }}
+      className="feedback-button"
+    >
+      {text}
+    </button>
+  );
 };
 
 export default Button;
