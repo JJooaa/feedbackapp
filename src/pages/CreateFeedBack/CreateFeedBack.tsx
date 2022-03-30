@@ -2,6 +2,7 @@ import GoBackHeader from "../../components/GoBackHeader/GoBackHeader";
 import "./createFeedback.scss";
 import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
 import { ReactComponent as NewFeedBackIcon } from "../../assets/shared/icon-new-feedback1.svg";
+import OptionList from "../../components/OptionList/OptionList";
 interface Values {
   title: string;
   category: string;
@@ -14,6 +15,7 @@ const CreateFeedBack = () => {
     category: "",
     detail: "",
   };
+  const options = ["Feature", "UI", "UX", "Enhancement", "Bug"];
   return (
     <>
       <GoBackHeader />
@@ -43,6 +45,7 @@ const CreateFeedBack = () => {
                 <label>Category</label>
                 <p>Choose a category for your feedback</p>
                 <Field id="category" name="category" />
+                <OptionList array={options} />
               </div>
               <div>
                 <label>Feedback Detail</label>

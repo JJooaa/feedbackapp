@@ -6,6 +6,8 @@
   display: flex;
   padding: 24px 0px;
   flex-direction: column;
+  max-width: 730px;
+  margin: 0 auto;
 
   h1 {
     align-self: flex-start;
@@ -84,6 +86,8 @@ textarea {
   background: white;
   padding: 24px;
   border-radius: 10px;
+  max-width: 730px;
+  margin: 0 auto;
 
   h2 {
     font-size: 18px;

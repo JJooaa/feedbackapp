@@ -1,6 +1,8 @@
 .create-container {
   background: white;
   border-radius: 10px;
+  max-width: 540px;
+  margin: 0 auto;
   display: flex;
   position: relative;
   flex-direction: column;

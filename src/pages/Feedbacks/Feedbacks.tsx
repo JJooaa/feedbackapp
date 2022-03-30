@@ -10,21 +10,30 @@ import checkIcon from "../../assets/shared/icon-check.svg";
 import Empty from "../../components/Empty/Empty";
 import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import data from "../../data.json";
+import OptionList from "../../components/OptionList/OptionList";
 
 // interface Props {
 //     staticData: {}[];
 //     setFilteredData: React.Dispatch<React.SetStateAction<{}[]>>;
 //     filteredData: any;
 // }
+const options: Array<string> = [
+  "Most Upvotes",
+  "Least Upvotes",
+  "Most Comments",
+  "Least Comments",
+];
+
 const Feedbacks: React.FC = () => {
   const staticData = data.productRequests;
   const [filteredData, setFilteredData] = useState(staticData);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const [isHamburgerOpen, setHamburgerIsOpen] = useState<boolean>(false);
   const [isSortByOpen, setIsSortByOpen] = useState<boolean>(false);
   const [currentOption, setCurrentOption] = useState<string>("Most Upvotes");
 
   const onHamburgerClick = (): void => {
-    setIsMenuOpen((prevState) => !prevState);
+    setHamburgerIsOpen((prevState) => !prevState);
   };
 
   const changeSortBy = (value: string): void => {
@@ -57,16 +66,10 @@ const Feedbacks: React.FC = () => {
     }
   };
 
-  const handleSortBy = (): void => {
+  const handleS
+  ortBy = (): void => {
     setIsSortByOpen((prevState) => !prevState);
   };
-
-  const options: Array<string> = [
-    "Most Upvotes",
-    "Least Upvotes",
-    "Most Comments",
-    "Least Comments",
-  ];
 
   useEffect(() => {
     changeSortBy("Most Upvotes");
@@ -86,7 +89,7 @@ const Feedbacks: React.FC = () => {
           <h2>Feedback Board</h2>
         </div>
         <img
-          src={isMenuOpen === false ? hamburger : close}
+          src={isHamburgerOpen === false ? hamburger : close}
           alt="hamburger menu"
           onClick={onHamburgerClick}
         />
@@ -104,20 +107,12 @@ const Feedbacks: React.FC = () => {
           </span>
         </p>
         {isSortByOpen && (
-          <ul>
-            {options.map((item, index: number) => (
-              <li
-                key={index}
-                onClick={() => {
-                  changeSortBy(item);
-                  handleSortBy();
-                }}
-              >
-                {item}
-                {renderCheckIcon(item)}
-              </li>
-            ))}
-          </ul>
+          <OptionList
+            array={options}
+            renderCheckIcon={renderCheckIcon}
+            changeSortBy={changeSortBy}
+            handleSortBy={handleSortBy}
+          />
         )}
 
         <Button
@@ -135,7 +130,7 @@ const Feedbacks: React.FC = () => {
           <Empty />
         )}
       </main>
-      {isMenuOpen && <Menu filteredData={filteredData} />}
+      {isHamburgerOpen && <Menu filteredData={filteredData} />}
     </>
   );
 };
