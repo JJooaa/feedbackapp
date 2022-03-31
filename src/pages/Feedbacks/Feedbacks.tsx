@@ -6,17 +6,11 @@ import close from "../../assets/shared/mobile/icon-close.svg";
 import Button from "../../components/Button/Button";
 import { ReactComponent as DownArrow } from "../../assets/shared/icon-arrow-down.svg";
 import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
-import checkIcon from "../../assets/shared/icon-check.svg";
 import Empty from "../../components/Empty/Empty";
 import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import data from "../../data.json";
 import OptionList from "../../components/OptionList/OptionList";
 
-// interface Props {
-//     staticData: {}[];
-//     setFilteredData: React.Dispatch<React.SetStateAction<{}[]>>;
-//     filteredData: any;
-// }
 const options: Array<string> = [
   "Most Upvotes",
   "Least Upvotes",
@@ -66,20 +60,13 @@ const Feedbacks: React.FC = () => {
     }
   };
 
-  const handleS
-  ortBy = (): void => {
+  const handleIsOpen = (): void => {
     setIsSortByOpen((prevState) => !prevState);
   };
 
   useEffect(() => {
     changeSortBy("Most Upvotes");
   }, []);
-
-  const renderCheckIcon = (item: {}): JSX.Element | null => {
-    return currentOption === item ? (
-      <img src={checkIcon} className="check-icon" alt="checkicon" />
-    ) : null;
-  };
 
   return (
     <>
@@ -94,10 +81,11 @@ const Feedbacks: React.FC = () => {
           onClick={onHamburgerClick}
         />
       </header>
+
       <div className="secondheader">
         <p>
           Sort by :
-          <span onClick={handleSortBy}>
+          <span onClick={handleIsOpen}>
             {currentOption}
             {isSortByOpen === false ? (
               <DownArrow className="arrow" />
@@ -109,9 +97,10 @@ const Feedbacks: React.FC = () => {
         {isSortByOpen && (
           <OptionList
             array={options}
-            renderCheckIcon={renderCheckIcon}
             changeSortBy={changeSortBy}
-            handleSortBy={handleSortBy}
+            handleIsOpen={handleIsOpen}
+            page="feedbacks"
+            currentOption={currentOption}
           />
         )}
 
@@ -121,6 +110,7 @@ const Feedbacks: React.FC = () => {
           link="/feedbacks/create"
         />
       </div>
+
       <main className="main">
         {filteredData.length !== 0 ? (
           filteredData.map((item: any, index: number) => (

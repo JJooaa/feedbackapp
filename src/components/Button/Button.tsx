@@ -8,7 +8,6 @@ interface Props {
 
 const Button = ({ text, color, link }: Props) => {
   let navigate = useNavigate();
-  console.log(link);
 
   return (
     <button

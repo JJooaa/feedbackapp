@@ -42,7 +42,6 @@ const Menu: React.FC<Props> = ({ filteredData }) => {
             <li>
               Planned<span>{planned.length}</span>
             </li>
-
             <li>
               In-progress<span>{inProgress.length}</span>
             </li>

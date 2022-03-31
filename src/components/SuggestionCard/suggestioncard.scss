@@ -10,7 +10,9 @@
   font-size: 13px;
   max-width: 730px;
   margin: 0 auto;
-
+  // @media screen and (min-width: 700px) {
+  //   flex-direction: row;
+  // }
   .card-link {
     font-size: 13px;
     font-weight: 700;
