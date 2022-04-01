@@ -41,7 +41,7 @@ const SingleComment = ({ index, item }: Props) => {
           <h3 onClick={handleReplyClick}>Reply</h3>
         </div>
       </div>
-      <div>{item.content}</div>
+      <p>{item.content}</p>
       {isReplying && <PostReply />}
     </div>
   );

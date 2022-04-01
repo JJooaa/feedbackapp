@@ -7,14 +7,14 @@
   max-width: 730px;
   margin: 0 auto;
 
-  .go-back {
+  div {
     display: flex;
     align-items: center;
     gap: 10px;
 
-    .detail-back {
+    a {
       color: #647196;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: bold;
       text-decoration: none;
     }

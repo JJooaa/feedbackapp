@@ -26,6 +26,14 @@
   gap: 16px;
   margin: 12px 0px;
 
+  p {
+    font-size: 13px;
+    color: #647196;
+    @media screen and (min-width: 700px) {
+      font-size: 15px;
+    }
+  }
+
   .comment-user {
     display: flex;
     height: 40px;
@@ -37,22 +45,15 @@
       font-size: 13px;
       color: #3a4374;
       font-weight: 600;
+      @media screen and (min-width: 700px) {
+        font-size: 15px;
+      }
     }
 
     h3 {
       font-size: 13px;
       color: #4661e6;
     }
-
-    p {
-      font-size: 13px;
-      color: #647196;
-    }
-  }
-
-  div {
-    font-size: 13px;
-    color: #647196;
   }
 
   .user-info-wrapper {

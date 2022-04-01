@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 const GoBackHeader = () => {
   return (
     <header className="feedback-header">
-      <div className="go-back">
+      <div>
         <img src={arrowLeft} alt="arrow-left" />
-        <Link className="detail-back" to="/feedbacks">
-          Go Back
-        </Link>
+        <Link to="/feedbacks">Go Back</Link>
       </div>
     </header>
   );

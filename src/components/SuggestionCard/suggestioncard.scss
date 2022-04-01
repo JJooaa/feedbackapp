@@ -10,19 +10,39 @@
   font-size: 13px;
   max-width: 730px;
   margin: 0 auto;
-  // @media screen and (min-width: 700px) {
-  //   flex-direction: row;
-  // }
-  .card-link {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: -0.18px;
-    color: #3a4374;
-    text-decoration: none;
-    cursor: pointer;
+
+  @media screen and (min-width: 700px) {
+    height: 150px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 40px;
+    align-items: center;
   }
 
-  .category {
+  .info-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p {
+      @media screen and (min-width: 700px) {
+        font-size: 16px;
+      }
+    }
+    a {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.18px;
+      color: #3a4374;
+      text-decoration: none;
+      cursor: pointer;
+
+      @media screen and (min-width: 700px) {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .bubble {
     width: fit-content;
     border-radius: 10px;
     background: #f2f4ff;
@@ -30,20 +50,16 @@
 
     h2 {
       font-size: 13px;
-      display: block;
       color: #4661e6;
     }
   }
 
+  // if mobile version
   .data {
     display: flex;
     justify-content: space-between;
     height: 32px;
     align-items: center;
-
-    &:first-child {
-      background-color: red;
-    }
   }
 
   .info-container {
@@ -52,5 +68,22 @@
     gap: 10px;
     font-weight: bold;
     color: #3a4374;
+    span {
+      @media screen and (min-width: 700px) {
+        font-size: 16px;
+      }
+    }
   }
+}
+// comment buble if tablet or above
+.comment {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+// if tablet or above change upvotes to left
+.order1 {
+  order: -1;
+  display: flex;
+  flex-direction: column;
 }
