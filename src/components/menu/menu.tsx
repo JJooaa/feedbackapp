@@ -1,11 +1,12 @@
 import React from "react";
 import "./menu.scss";
 import { Link } from "react-router-dom";
-
+import { useWindowSize } from "usehooks-ts";
 interface Props {
   filteredData: {}[];
 }
 const Menu: React.FC<Props> = ({ filteredData }) => {
+  const { width } = useWindowSize();
   const features: Array<string> = [
     "All",
     "UI",
@@ -26,8 +27,12 @@ const Menu: React.FC<Props> = ({ filteredData }) => {
   );
 
   return (
-    <div className="wrapper">
+    <div className={width < 700 ? "wrapper" : "wrapper desktop"}>
       <nav>
+        <div className="tablet-logo">
+          <h1>Frontend Mentor</h1>
+          <h2>Feedback Board</h2>
+        </div>
         <ul className="features-ul">
           {features.map((item: string, index: number) => (
             <li key={index}>{item}</li>

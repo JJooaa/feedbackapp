@@ -18,7 +18,6 @@ interface Props {
 
 const SuggestionCard: React.FC<Props> = ({ item }) => {
   const { width } = useWindowSize();
- 
   const returnCommentsLength = (commentsArray: object[]): number => {
     return commentsArray === undefined ? 0 : commentsArray.length;
   };

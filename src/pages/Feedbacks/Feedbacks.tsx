@@ -10,6 +10,7 @@ import Empty from "../../components/Empty/Empty";
 import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import data from "../../data.json";
 import OptionList from "../../components/OptionList/OptionList";
+import { useWindowSize } from "usehooks-ts";
 
 const options: Array<string> = [
   "Most Upvotes",
@@ -19,6 +20,7 @@ const options: Array<string> = [
 ];
 
 const Feedbacks: React.FC = () => {
+  const { width } = useWindowSize();
   const staticData = data.productRequests;
   const [filteredData, setFilteredData] = useState(staticData);
 
@@ -66,21 +68,29 @@ const Feedbacks: React.FC = () => {
 
   useEffect(() => {
     changeSortBy("Most Upvotes");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <header className="header">
-        <div>
-          <h1>Frontend Mentor</h1>
-          <h2>Feedback Board</h2>
-        </div>
-        <img
-          src={isHamburgerOpen === false ? hamburger : close}
-          alt="hamburger menu"
-          onClick={onHamburgerClick}
-        />
-      </header>
+      {isHamburgerOpen === true ? (
+        <Menu filteredData={filteredData} />
+      ) : (
+        width > 700 && <Menu filteredData={filteredData} />
+      )}
+      {width < 700 && (
+        <header className="header">
+          <div>
+            <h1>Frontend Mentor</h1>
+            <h2>Feedback Board</h2>
+          </div>
+          <img
+            src={isHamburgerOpen === false ? hamburger : close}
+            alt="hamburger menu"
+            onClick={onHamburgerClick}
+          />
+        </header>
+      )}
 
       <div className="secondheader">
         <p>
@@ -120,7 +130,6 @@ const Feedbacks: React.FC = () => {
           <Empty />
         )}
       </main>
-      {isHamburgerOpen && <Menu filteredData={filteredData} />}
     </>
   );
 };

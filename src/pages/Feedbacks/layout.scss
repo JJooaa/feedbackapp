@@ -35,6 +35,11 @@
   color: white;
   position: relative;
   font-size: 13px;
+  margin: 0 auto;
+  @media screen and (min-width: 700px) {
+    border-radius: 10px;
+    max-width: 720px;
+  }
   p {
     font-weight: 300;
     display: flex;

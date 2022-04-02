@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext, createContext } from "react";
 import "./App.css";
 import Feedbacks from "./pages/Feedbacks/Feedbacks";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import FeedbackDetail from "./components/FeedbackDetail/FeedbackDetail";
 import CreateFeedBack from "./pages/CreateFeedBack/CreateFeedBack";
+import data from "./data.json";
 
 const App: React.FC = () => {
   return (

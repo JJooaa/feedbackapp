@@ -4,11 +4,16 @@
   right: 0;
   bottom: -72px;
   height: 100%;
+  z-index: 50;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: flex-end;
+  @media screen and (min-width: 700px) {
+    position: initial;
+  }
 
   nav {
+    z-index: 100;
     width: 70%;
     background: #f7f8fd;
     height: 100%;
@@ -16,6 +21,11 @@
     flex-direction: column;
     padding: 24px;
     gap: 20px;
+    @media screen and (min-width: 700px) {
+      flex-direction: row;
+      width: 100%;
+      justify-content: center;
+    }
 
     .features-ul {
       list-style-type: none;
@@ -81,5 +91,25 @@
         font-weight: 400;
       }
     }
+  }
+}
+
+.tablet-logo {
+  width: 223px;
+  height: 175px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  border-radius: 10px;
+  padding: 24px;
+  background: url("../../assets/suggestions/tablet/background-header.png");
+  h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.75;
   }
 }

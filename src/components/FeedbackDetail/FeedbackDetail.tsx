@@ -10,6 +10,7 @@ import CommentList from "../Comments/CommentList";
 const FeedbackDetail = () => {
   const { id } = useParams();
   const [item, setItem] = useState<any>(null);
+  console.log(item);
 
   const getItemWithId = useCallback(async () => {
     let item = data.productRequests.filter((item) => item.id === Number(id));
@@ -39,7 +40,7 @@ const FeedbackDetail = () => {
       </header>
       <main className="main">
         <SuggestionCard item={item[0]} />
-        <CommentList comment={item[0].comments} />
+        <CommentList comment={item[0].comments} setItem={setItem} />
       </main>
     </>
   );
