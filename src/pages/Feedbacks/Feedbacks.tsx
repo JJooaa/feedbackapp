@@ -8,9 +8,9 @@ import { ReactComponent as DownArrow } from "../../assets/shared/icon-arrow-down
 import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
 import Empty from "../../components/Empty/Empty";
 import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
-import data from "../../data.json";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
+import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
 
 const options: Array<string> = [
   "Most Upvotes",
@@ -21,8 +21,11 @@ const options: Array<string> = [
 
 const Feedbacks: React.FC = () => {
   const { width } = useWindowSize();
-  const staticData = data.productRequests;
-  const [filteredData, setFilteredData] = useState(staticData);
+
+  // get data from redux
+  const data = useAppSelector((state) => state.data);
+  // make a copy, then render and sort the copy
+  const [dataCopy, setDataCopy] = useState([...data]);
 
   const [isHamburgerOpen, setHamburgerIsOpen] = useState<boolean>(false);
   const [isSortByOpen, setIsSortByOpen] = useState<boolean>(false);
@@ -35,30 +38,30 @@ const Feedbacks: React.FC = () => {
   const changeSortBy = (value: string): void => {
     if (value === "Most Upvotes") {
       setCurrentOption("Most Upvotes");
-      let mostUpvotes = staticData.sort(
+      let mostUpvotes = dataCopy.sort(
         (a: any, b: any) => b.upvotes - a.upvotes
       );
-      setFilteredData((prevState) => [...(prevState = mostUpvotes)]);
+      setDataCopy((prevState) => [...(prevState = mostUpvotes)]);
     }
     if (value === "Least Upvotes") {
       setCurrentOption("Least Upvotes");
-      let leastUpvotes = staticData.sort(
+      let leastUpvotes = dataCopy.sort(
         (a: any, b: any) => a.upvotes - b.upvotes
       );
-      setFilteredData((prevState) => [...(prevState = leastUpvotes)]);
+      setDataCopy((prevState) => [...(prevState = leastUpvotes)]);
     }
     if (value === "Most Comments") {
       setCurrentOption("Most Comments");
-      let undefinedComments = staticData.filter(
+      let undefinedComments = dataCopy.filter(
         (item: any) => item.comments === undefined
       );
-      let definedComments = staticData.filter(
+      let definedComments = dataCopy.filter(
         (item: any) => item.comments !== undefined
       );
       let sortDefined = definedComments
         .sort((a: any, b: any) => b.comments.length - a.comments.length)
         .concat(undefinedComments);
-      setFilteredData((prevState) => [...(prevState = sortDefined)]);
+      setDataCopy((prevState) => [...(prevState = sortDefined)]);
     }
   };
 
@@ -73,11 +76,7 @@ const Feedbacks: React.FC = () => {
 
   return (
     <>
-      {isHamburgerOpen === true ? (
-        <Menu filteredData={filteredData} />
-      ) : (
-        width > 700 && <Menu filteredData={filteredData} />
-      )}
+      {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
       {width < 700 && (
         <header className="header">
           <div>
@@ -106,8 +105,8 @@ const Feedbacks: React.FC = () => {
         </p>
         {isSortByOpen && (
           <OptionList
-            array={options}
             changeSortBy={changeSortBy}
+            array={options}
             handleIsOpen={handleIsOpen}
             page="feedbacks"
             currentOption={currentOption}
@@ -122,8 +121,8 @@ const Feedbacks: React.FC = () => {
       </div>
 
       <main className="main">
-        {filteredData.length !== 0 ? (
-          filteredData.map((item: any, index: number) => (
+        {dataCopy.length !== 0 ? (
+          dataCopy.map((item: any, index: number) => (
             <SuggestionCard key={index} item={item} />
           ))
         ) : (

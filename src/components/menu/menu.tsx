@@ -2,10 +2,7 @@ import React from "react";
 import "./menu.scss";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-
-interface Props {
-  filteredData: {}[];
-}
+import { useAppSelector } from "../../redux/dataSlice";
 
 const features: Array<string> = [
   "All",
@@ -16,16 +13,18 @@ const features: Array<string> = [
   "Feature",
 ];
 
-const Menu: React.FC<Props> = ({ filteredData }) => {
+const Menu: React.FC = () => {
+  const data = useAppSelector((state) => state.data);
+
   const { width } = useWindowSize();
 
-  const planned = filteredData.filter(
+  const planned = data.filter(
     (item: { status?: string }) => item.status === "planned"
   );
-  const inProgress = filteredData.filter(
+  const inProgress = data.filter(
     (item: { status?: string }) => item.status === "in-progress"
   );
-  const live = filteredData.filter(
+  const live = data.filter(
     (item: { status?: string }) => item.status === "live"
   );
 

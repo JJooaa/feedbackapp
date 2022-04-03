@@ -6,9 +6,13 @@
     display: flex;
     list-style-type: none;
 
-    li {
+    .default {
+      cursor: pointer;
       flex-grow: 1;
       text-align: center;
+    }
+    .active {
+      color: green;
     }
   }
 }

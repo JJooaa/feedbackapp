@@ -1,20 +1,19 @@
 import { useState } from "react";
 import GoBackHeader from "../../components/GoBackHeader/GoBackHeader";
-import data from "../../data.json";
+import { useAppSelector } from "../../redux/dataSlice";
 import "./roadmap.scss";
 
-const filteredData = data.productRequests;
-
 const Roadmap = () => {
-  const [currentSelect, setCurrentSelect] = useState("");
+  const data = useAppSelector((state) => state.data);
+  const [currentSelect, setCurrentSelect] = useState<any>("");
 
-  const planned = filteredData.filter(
+  const planned = data.filter(
     (item: { status?: string }) => item.status === "planned"
   );
-  const inProgress = filteredData.filter(
+  const inProgress = data.filter(
     (item: { status?: string }) => item.status === "in-progress"
   );
-  const live = filteredData.filter(
+  const live = data.filter(
     (item: { status?: string }) => item.status === "live"
   );
 
@@ -40,7 +39,13 @@ const Roadmap = () => {
       <nav className="roadmap-nav">
         <ul>
           {Object.entries(options).map((item, index) => (
-            <li key={index} onClick={() => setCurrentSelect(item[1].text)}>
+            <li
+              key={index}
+              className={
+                currentSelect === item[1].text ? "default active" : "default"
+              }
+              onClick={() => setCurrentSelect(item[1].text)}
+            >
               {item[1].text} ({item[1].number})
             </li>
           ))}
