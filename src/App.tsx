@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import FeedbackDetail from "./components/FeedbackDetail/FeedbackDetail";
 import CreateFeedBack from "./pages/CreateFeedBack/CreateFeedBack";
 import data from "./data.json";
+import Roadmap from "./pages/Roadmap/Roadmap";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Route path="/feedbacks" element={<Feedbacks />} />
         <Route path="/feedbacks/:id" element={<FeedbackDetail />} />
         <Route path="/feedbacks/create" element={<CreateFeedBack />} />
+        <Route path="/roadmap" element={<Roadmap />} />
         <Route
           path="*"
           element={

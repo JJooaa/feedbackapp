@@ -31,8 +31,8 @@ const CreateFeedBack: React.FC = () => {
 
   return (
     <>
-      <GoBackHeader />
       <main className="main">
+        <GoBackHeader page="create" />
         <div className="create-container">
           <NewFeedBackIcon className="add-icon" />
           <h1>Create New Feedback</h1>

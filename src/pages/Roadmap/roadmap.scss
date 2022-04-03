@@ -1,0 +1,14 @@
+.roadmap-nav {
+  padding: 20px 0px 16px 0px;
+  border-bottom: 1px solid grey;
+
+  ul {
+    display: flex;
+    list-style-type: none;
+
+    li {
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+}

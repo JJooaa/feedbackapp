@@ -6,6 +6,7 @@ import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import data from "../../data.json";
 import { Link, useParams } from "react-router-dom";
 import CommentList from "../Comments/CommentList";
+import GoBackHeader from "../GoBackHeader/GoBackHeader";
 
 const FeedbackDetail = () => {
   const { id } = useParams();
@@ -29,15 +30,7 @@ const FeedbackDetail = () => {
 
   return (
     <>
-      <header className="feedback-header">
-        <div className="go-back">
-          <img src={arrowLeft} alt="arrow-left" />
-          <Link className="detail-back" to="/feedbacks">
-            Go Back
-          </Link>
-        </div>
-        <Button text="Edit Feedback" color="#4661E6" link="feedbacks/edit" />
-      </header>
+      <GoBackHeader page="detail" />
       <main className="main">
         <SuggestionCard item={item[0]} />
         <CommentList comment={item[0].comments} setItem={setItem} />

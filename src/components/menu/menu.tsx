@@ -2,19 +2,22 @@ import React from "react";
 import "./menu.scss";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
+
 interface Props {
   filteredData: {}[];
 }
+
+const features: Array<string> = [
+  "All",
+  "UI",
+  "UX",
+  "Enchancement",
+  "Bug",
+  "Feature",
+];
+
 const Menu: React.FC<Props> = ({ filteredData }) => {
   const { width } = useWindowSize();
-  const features: Array<string> = [
-    "All",
-    "UI",
-    "UX",
-    "Enchancement",
-    "Bug",
-    "Feature",
-  ];
 
   const planned = filteredData.filter(
     (item: { status?: string }) => item.status === "planned"
@@ -27,12 +30,15 @@ const Menu: React.FC<Props> = ({ filteredData }) => {
   );
 
   return (
-    <div className={width < 700 ? "wrapper" : "wrapper desktop"}>
+    <div className="wrapper">
       <nav>
-        <div className="tablet-logo">
-          <h1>Frontend Mentor</h1>
-          <h2>Feedback Board</h2>
-        </div>
+        {width > 700 && (
+          <div className="tablet-logo">
+            <h1>Frontend Mentor</h1>
+            <h2>Feedback Board</h2>
+          </div>
+        )}
+
         <ul className="features-ul">
           {features.map((item: string, index: number) => (
             <li key={index}>{item}</li>
