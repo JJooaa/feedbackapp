@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Feedbacks from "./pages/Feedbacks/Feedbacks";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import FeedbackDetail from "./components/FeedbackDetail/FeedbackDetail";
+import FeedbackDetail from "./pages/FeedbackDetail/FeedbackDetail";
 import CreateFeedBack from "./pages/CreateFeedBack/CreateFeedBack";
 import Roadmap from "./pages/Roadmap/Roadmap";
 import { Provider } from "react-redux";

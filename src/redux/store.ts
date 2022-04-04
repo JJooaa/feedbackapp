@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import dataReducer from "./dataSlice";
+import counterReducer from "./counterSlice";
 
 const store = configureStore({
   reducer: {
     data: dataReducer,
+    counter: counterReducer,
   },
 });
 

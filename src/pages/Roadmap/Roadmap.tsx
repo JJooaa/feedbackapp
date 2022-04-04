@@ -4,7 +4,7 @@ import { useAppSelector } from "../../redux/dataSlice";
 import "./roadmap.scss";
 
 const Roadmap = () => {
-  const data = useAppSelector((state) => state.data);
+  const data = useAppSelector((state) => state.data.value);
   const [currentSelect, setCurrentSelect] = useState<any>("");
 
   const planned = data.filter(

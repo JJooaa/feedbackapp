@@ -1,22 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
-import SuggestionCard from "../SuggestionCard/SuggestionCard";
+import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import "./feedbackdetail.scss";
-import Button from "../Button/Button";
-import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
-import data from "../../data.json";
-import { Link, useParams } from "react-router-dom";
-import CommentList from "../Comments/CommentList";
-import GoBackHeader from "../GoBackHeader/GoBackHeader";
+import { useParams } from "react-router-dom";
+import CommentList from "../../components/Comments/CommentList";
+import GoBackHeader from "../../components/GoBackHeader/GoBackHeader";
+import { useAppSelector } from "../../redux/dataSlice";
 
 const FeedbackDetail = () => {
   const { id } = useParams();
   const [item, setItem] = useState<any>(null);
-  console.log(item);
+
+  const placeholder = useAppSelector((state) => state.data.value);
 
   const getItemWithId = useCallback(async () => {
-    let item = data.productRequests.filter((item) => item.id === Number(id));
+    let item = placeholder.filter((item: any) => item.id === Number(id));
     return item;
-  }, [id]);
+  }, [id, placeholder]);
 
   useEffect(() => {
     const getItem = async () => {

@@ -8,29 +8,44 @@
   position: relative;
   flex-direction: column;
   padding: 44px 24px 24px 24px;
+
   .add-icon {
     position: absolute;
     top: -20px;
   }
+
   h1 {
     font-size: 18px;
     color: #3a4374;
     margin-bottom: 40px;
+    @media screen and (min-width: 700px) {
+      font-size: 24px;
+    }
   }
+
   form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     label {
       color: #3a4374;
       font-size: 13px;
       font-weight: bold;
+      @media screen and (min-width: 700px) {
+        font-size: 16px;
+      }
     }
+
     .create-p {
       font-size: 14px;
       color: #647196;
       font-weight: normal;
+      @media screen and (min-width: 700px) {
+        font-size: 15px;
+      }
     }
+
     input,
     textarea {
       cursor: pointer;
@@ -46,7 +61,11 @@
       &:focus {
         outline: #4661e6 solid 1px;
       }
+      @media screen and (min-width: 700px) {
+        font-size: 15px;
+      }
     }
+
     .form-buttons {
       display: flex;
       flex-direction: column;

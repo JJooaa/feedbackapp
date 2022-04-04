@@ -8,14 +8,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   img {
     cursor: pointer;
   }
+  
   div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: white;
+    
     h1,
     h2 {
       font-size: 14px;
@@ -40,10 +43,15 @@
     border-radius: 10px;
     max-width: 720px;
   }
+  
   p {
     font-weight: 300;
     display: flex;
+    @media screen and (min-width: 700px) {
+      font-size: 14px;
+    }
   }
+  
   span {
     font-weight: 600;
     display: flex;

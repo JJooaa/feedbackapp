@@ -14,7 +14,7 @@ const features: Array<string> = [
 ];
 
 const Menu: React.FC = () => {
-  const data = useAppSelector((state) => state.data);
+  const data = useAppSelector((state) => state.data.value);
 
   const { width } = useWindowSize();
 

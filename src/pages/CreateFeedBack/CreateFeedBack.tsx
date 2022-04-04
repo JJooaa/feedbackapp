@@ -24,19 +24,19 @@ const initialValues = {
 const CreateFeedBack: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const test = () => {
-    dispatch(
-      addItem({
-        id: 15,
-        title: "test",
-        category: "test",
-        upvotes: 5,
-        status: "suggestion",
-        description: "asdjadklsjlasd",
-        comments: [],
-      })
-    );
-  };
+  // const test = () => {
+  //   dispatch(
+  //     addItem({
+  //       id: 15,
+  //       title: "test",
+  //       category: "test",
+  //       upvotes: 5,
+  //       status: "suggestion",
+  //       description: "asdjadklsjlasd",
+  //       comments: [],
+  //     })
+  //   );
+  // };
   // what is the chosen value
   const [currentOption, setCurrentOption] = useState("Feature");
   // is the options menu open?

@@ -11,7 +11,7 @@ import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
-
+import { increment } from "../../redux/counterSlice";
 const options: Array<string> = [
   "Most Upvotes",
   "Least Upvotes",
@@ -23,9 +23,11 @@ const Feedbacks: React.FC = () => {
   const { width } = useWindowSize();
 
   // get data from redux
-  const data = useAppSelector((state) => state.data);
+  const data = useAppSelector((state) => state.data.value);
   // make a copy, then render and sort the copy
   const [dataCopy, setDataCopy] = useState([...data]);
+
+  const dispatch = useAppDispatch();
 
   const [isHamburgerOpen, setHamburgerIsOpen] = useState<boolean>(false);
   const [isSortByOpen, setIsSortByOpen] = useState<boolean>(false);
