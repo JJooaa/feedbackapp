@@ -1,18 +1,58 @@
 .roadmap-nav {
   padding: 20px 0px 16px 0px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #8c92b345;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  @media screen and (min-width: 700px) {
+    border: none;
+  }
 
   ul {
     display: flex;
     list-style-type: none;
 
     .default {
+      opacity: 40%;
       cursor: pointer;
       flex-grow: 1;
       text-align: center;
+      font-weight: bold;
+      font-size: 13px;
+      color: #3a4374;
+      position: relative;
+      @media screen and (min-width: 700px) {
+        font-size: 15px;
+      }
     }
+
+    .large {
+      opacity: 100%;
+      text-align: left;
+    }
+
     .active {
-      color: green;
+      opacity: 100%;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        background: #ad1fea;
+        bottom: -17px;
+        left: 0;
+      }
     }
+  }
+}
+
+.current-select {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3a4374;
+  p {
+    font-size: 13px;
+    font-weight: normal;
+    color: #647196;
   }
 }

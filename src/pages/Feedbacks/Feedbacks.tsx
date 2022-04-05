@@ -29,15 +29,15 @@ const Feedbacks: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const [isHamburgerOpen, setHamburgerIsOpen] = useState<boolean>(false);
-  const [isSortByOpen, setIsSortByOpen] = useState<boolean>(false);
-  const [currentOption, setCurrentOption] = useState<string>("Most Upvotes");
+  const [isHamburgerOpen, setHamburgerIsOpen] = useState(false);
+  const [isSortByOpen, setIsSortByOpen] = useState(false);
+  const [currentOption, setCurrentOption] = useState("Most Upvotes");
 
-  const onHamburgerClick = (): void => {
+  const onHamburgerClick = () => {
     setHamburgerIsOpen((prevState) => !prevState);
   };
 
-  const changeSortBy = (value: string): void => {
+  const changeSortBy = (value: string) => {
     if (value === "Most Upvotes") {
       setCurrentOption("Most Upvotes");
       let mostUpvotes = dataCopy.sort(
@@ -67,7 +67,7 @@ const Feedbacks: React.FC = () => {
     }
   };
 
-  const handleIsOpen = (): void => {
+  const handleIsOpen = () => {
     setIsSortByOpen((prevState) => !prevState);
   };
 

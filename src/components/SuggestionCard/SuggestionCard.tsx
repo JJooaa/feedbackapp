@@ -31,7 +31,7 @@ const SuggestionCard: React.FC<Props> = ({ item }) => {
   const renderMobileVersion = () => {
     return (
       <div className="data">
-        <div className="info-container category">
+        <div className="info-container bubble category">
           <img alt="arrow pointing up" src={upArrow} />
           <span>{item.upvotes}</span>
         </div>
@@ -56,6 +56,7 @@ const SuggestionCard: React.FC<Props> = ({ item }) => {
       {width < 700 ? (
         renderMobileVersion()
       ) : (
+        // desktop version
         <>
           <div className="info-container bubble order1">
             <img alt="arrow pointing up" src={upArrow} />

@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { current } from "@reduxjs/toolkit";
+import { useEffect, useState } from "react";
+import { useWindowSize } from "usehooks-ts";
 import GoBackHeader from "../../components/GoBackHeader/GoBackHeader";
+import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import { useAppSelector } from "../../redux/dataSlice";
 import "./roadmap.scss";
 
 const Roadmap = () => {
+  const { width } = useWindowSize();
+
   const data = useAppSelector((state) => state.data.value);
-  const [currentSelect, setCurrentSelect] = useState<any>("");
+
+  const [currentSelect, setCurrentSelect] = useState("In-Progress");
 
   const planned = data.filter(
     (item: { status?: string }) => item.status === "planned"
@@ -17,40 +23,73 @@ const Roadmap = () => {
     (item: { status?: string }) => item.status === "live"
   );
 
-  console.log(currentSelect);
   const options = [
     {
       text: "Planned",
       number: planned.length,
+      description: "Ideas prioritized for research",
+      item: planned,
     },
     {
-      text: "In-Progess",
+      text: "In-Progress",
       number: inProgress.length,
+      description: "Currently being developed",
+      item: inProgress,
     },
     {
       text: "Live",
       number: live.length,
+      description: "Released features",
+      item: live,
     },
   ];
+  // on mobile if currentSelect is options.text render options.item
+  const array = options.filter((item: any) => item.text === currentSelect);
+
+  const renderCurrentSelectCards = () => {
+    return array[0].item.map((item: any, index: number) => (
+      <SuggestionCard key={index} item={item} />
+    ));
+  };
+
+  console.log(array);
 
   return (
     <>
       <GoBackHeader page="roadmap" />
       <nav className="roadmap-nav">
         <ul>
-          {Object.entries(options).map((item, index) => (
+          {options.map((item, index) => (
             <li
               key={index}
               className={
-                currentSelect === item[1].text ? "default active" : "default"
+                currentSelect === item.text && width < 700
+                  ? "default active"
+                  : width > 700
+                  ? "default large"
+                  : "default"
               }
-              onClick={() => setCurrentSelect(item[1].text)}
+              onClick={() => setCurrentSelect(item.text)}
             >
-              {item[1].text} ({item[1].number})
+              {item.text} ({item.number})
+              {width > 700 && <p>{item.description}</p>}
             </li>
           ))}
         </ul>
       </nav>
+      <main className="main">
+        <div>
+          {array.map(
+            (item) =>
+              item.text === currentSelect && (
+                <div className="current-select">
+                  {item.text} ({item.number})<p>{item.description}</p>
+                </div>
+              )
+          )}
+        </div>
+        {renderCurrentSelectCards()}
+      </main>
     </>
   );
 };
