@@ -48,7 +48,9 @@ const Roadmap = () => {
 
   const renderCurrentSelectCards = () => {
     return array[0].item.map((item: any, index: number) => (
-      <SuggestionCard key={index} item={item} />
+      <div className="suggestion-card-top">
+        <SuggestionCard key={index} item={item} />
+      </div>
     ));
   };
 
