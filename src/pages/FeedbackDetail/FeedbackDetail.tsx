@@ -31,7 +31,7 @@ const FeedbackDetail = () => {
     <>
       <GoBackHeader page="detail" />
       <main className="main">
-        <SuggestionCard item={item[0]} />
+        <SuggestionCard item={item[0]} page="detail" />
         <CommentList comment={item[0].comments} setItem={setItem} />
       </main>
     </>

@@ -12,6 +12,7 @@ import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
 import { increment } from "../../redux/counterSlice";
+
 const options: Array<string> = [
   "Most Upvotes",
   "Least Upvotes",
@@ -125,7 +126,7 @@ const Feedbacks: React.FC = () => {
       <main className="main">
         {dataCopy.length !== 0 ? (
           dataCopy.map((item: any, index: number) => (
-            <SuggestionCard key={index} item={item} />
+            <SuggestionCard key={index} item={item} page="feedbacks" />
           ))
         ) : (
           <Empty />

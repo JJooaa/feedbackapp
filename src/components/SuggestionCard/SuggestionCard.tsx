@@ -14,9 +14,10 @@ interface Props {
     status: string;
     id: number;
   };
+  page: string;
 }
 
-const SuggestionCard: React.FC<Props> = ({ item }) => {
+const SuggestionCard: React.FC<Props> = ({ item, page }) => {
   const { width } = useWindowSize();
   const returnCommentsLength = (commentsArray: object[]): number => {
     return commentsArray === undefined ? 0 : commentsArray.length;
@@ -45,6 +46,7 @@ const SuggestionCard: React.FC<Props> = ({ item }) => {
 
   return (
     <div className="feedbackcard">
+      {page === "roadmap" && width < 700 && <li>{item.status}</li>}
       <div className="info-texts">
         <Link to={`/feedbacks/${item.id}`}>{item.title}</Link>
         <p>{item.description}</p>

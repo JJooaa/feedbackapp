@@ -1,4 +1,3 @@
-import { current } from "@reduxjs/toolkit";
 import { useEffect, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import GoBackHeader from "../../components/GoBackHeader/GoBackHeader";
@@ -43,18 +42,36 @@ const Roadmap = () => {
       item: live,
     },
   ];
-  // on mobile if currentSelect is options.text render options.item
-  const array = options.filter((item: any) => item.text === currentSelect);
+  // returns the current items in relation to currently selected option
+  const array = options.filter((item) => item.text === currentSelect);
+
+  // renders border top color based on currentOption eg. Planned -> orange
+  const borderTopColoring = (item: { status?: string }) => {
+    let value = "suggestion-card-top";
+    if (item.status === "planned") return "orange " + value;
+    if (item.status === "in-progress") return "purple " + value;
+    if (item.status === "live") return "blue " + value;
+  };
 
   const renderCurrentSelectCards = () => {
     return array[0].item.map((item: any, index: number) => (
-      <div className="suggestion-card-top">
-        <SuggestionCard key={index} item={item} />
+      <div className={borderTopColoring(item)}>
+        <SuggestionCard key={index} item={item} page="roadmap" />
       </div>
     ));
   };
 
-  console.log(array);
+  // renders correct ::after pseudo element color based on currentOption
+  const afterPseudoElement = (item: { text: string }) => {
+    if (width < 700 && item.text === currentSelect) {
+      return `default active ${currentSelect.toLowerCase()}`;
+    }
+    if (width > 700) {
+      return "default large";
+    } else {
+      return "default";
+    }
+  };
 
   return (
     <>
@@ -64,13 +81,7 @@ const Roadmap = () => {
           {options.map((item, index) => (
             <li
               key={index}
-              className={
-                currentSelect === item.text && width < 700
-                  ? "default active"
-                  : width > 700
-                  ? "default large"
-                  : "default"
-              }
+              className={afterPseudoElement(item)}
               onClick={() => setCurrentSelect(item.text)}
             >
               {item.text} ({item.number})
@@ -81,14 +92,11 @@ const Roadmap = () => {
       </nav>
       <main className="main">
         <div>
-          {array.map(
-            (item) =>
-              item.text === currentSelect && (
-                <div className="current-select">
-                  {item.text} ({item.number})<p>{item.description}</p>
-                </div>
-              )
-          )}
+          {array.map((item) => (
+            <div className="current-select">
+              {item.text} ({item.number})<p>{item.description}</p>
+            </div>
+          ))}
         </div>
         {renderCurrentSelectCards()}
       </main>
