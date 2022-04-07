@@ -8,16 +8,15 @@ interface Data {
 }
 
 const initialState: Data = {
-  value: [...data.productRequests],
+  value: data.productRequests,
 };
 
-export const dataSlice = createSlice({
+const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    addData: (state, action: PayloadAction<any>) => {
-      state += action.payload;
-    },
+    addData: (state, action: PayloadAction<any>) =>
+      (state.value = [...state.value, action.payload]) as any,
   },
 });
 

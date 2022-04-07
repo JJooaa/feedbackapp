@@ -92,12 +92,17 @@ const Roadmap = () => {
       </nav>
       <main className="main">
         <div>
-          {array.map((item) => (
-            <div className="current-select">
-              {item.text} ({item.number})<p>{item.description}</p>
-            </div>
-          ))}
+          {width < 700 &&
+            array.map((item) => (
+              <div className="current-select">
+                {item.text} ({item.number})<p>{item.description}</p>
+              </div>
+            ))}
         </div>
+        {/* {width > 700 &&
+          options.map((item) =>
+            item.item.map((element: any) => <div>{element.title}</div>)
+          )} */}
         {renderCurrentSelectCards()}
       </main>
     </>

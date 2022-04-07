@@ -46,7 +46,9 @@ const SuggestionCard: React.FC<Props> = ({ item, page }) => {
 
   return (
     <div className="feedbackcard">
-      {page === "roadmap" && width < 700 && <li>{item.status}</li>}
+      {page === "roadmap" && width < 700 && (
+        <li>{firstLetterToUpperCase(item.status)}</li>
+      )}
       <div className="info-texts">
         <Link to={`/feedbacks/${item.id}`}>{item.title}</Link>
         <p>{item.description}</p>

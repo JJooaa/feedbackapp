@@ -5,8 +5,7 @@ import { ReactComponent as NewFeedBackIcon } from "../../assets/shared/icon-new-
 import OptionList from "../../components/OptionList/OptionList";
 import { useState } from "react";
 import Button from "../../components/Button/Button";
-import { useAppDispatch } from "../../redux/dataSlice";
-import addItem from "../../redux/dataSlice";
+import { useAppDispatch, addData } from "../../redux/dataSlice";
 interface Values {
   title: string;
   category: string;
@@ -24,19 +23,18 @@ const initialValues = {
 const CreateFeedBack: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  // const test = () => {
-  //   dispatch(
-  //     addItem({
-  //       id: 15,
-  //       title: "test",
-  //       category: "test",
-  //       upvotes: 5,
-  //       status: "suggestion",
-  //       description: "asdjadklsjlasd",
-  //       comments: [],
-  //     })
-  //   );
-  // };
+  const test = () =>
+    dispatch(
+      addData({
+        id: 55,
+        title: "Add some new shit",
+        category: "enhancement",
+        upvotes: 50,
+        status: "suggestion",
+        description: "would be cool to add new shit",
+      })
+    );
+
   // what is the chosen value
   const [currentOption, setCurrentOption] = useState("Feature");
   // is the options menu open?
@@ -99,7 +97,7 @@ const CreateFeedBack: React.FC = () => {
                 </p>
                 <Field id="detail" name="detail" as="textarea" />
               </label>
-              <div className="form-buttons">
+              <div className="form-buttons" onClick={test}>
                 <Button text="Add Feedback" link="" color="#AD1FEA" />
                 <Button text="Cancel" link="/feedbacks" color="#3A4374" />
               </div>

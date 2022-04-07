@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { addData, useAppDispatch } from "../../redux/dataSlice";
 import Button from "../Button/Button";
 
 interface User {
@@ -9,15 +10,30 @@ interface User {
 interface Props {
   setItem: any;
   comment: {
-    content: "string";
+    content: string;
     id: number;
     user: User;
     replies?: {}[];
   }[];
 }
 const PostComment: React.FC<Props> = ({ setItem, comment }) => {
+  const dispatch = useAppDispatch();
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [state, setState] = useState<number>(0);
+
+  const addComment = () =>
+    dispatch(
+      addData({
+        content: "swag",
+        id: 22,
+        user: {
+          username: "joa",
+          name: "joa",
+          image: "./assets/user-images/image-jackson.jpg",
+        },
+        replies: [],
+      })
+    );
 
   const handleValueChange = (): void => {
     if (textAreaRef.current?.value.length !== undefined) {
@@ -54,7 +70,7 @@ const PostComment: React.FC<Props> = ({ setItem, comment }) => {
       ></textarea>
       <div>
         <p>{250 - state} characters left</p>
-        <span onClick={() => onSubmitClick()}>
+        <span onClick={addComment}>
           <Button text="Post Comment" color="#AD1FEA" link="" />
         </span>
       </div>

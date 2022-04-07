@@ -23,10 +23,14 @@ const GoBackHeader: React.FC<Props> = ({ page }) => {
         {page === "roadmap" && <h2>Roadmap</h2>}
       </div>
       {page === "detail" && (
-        <Button text="Edit Feedback" color="#4661E6" link="feedbacks/edit" />
+        <Button text="Edit Feedback" color="#4661E6" link="/feedbacks/edit" />
       )}
       {page === "roadmap" && (
-        <Button text="+ Add Feedback" color="#AD1FEA" link="feedbacks/create" />
+        <Button
+          text="+ Add Feedback"
+          color="#AD1FEA"
+          link="/feedbacks/create"
+        />
       )}
     </header>
   );

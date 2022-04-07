@@ -11,7 +11,7 @@ import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
-import { increment } from "../../redux/counterSlice";
+import store from "../../redux/store";
 
 const options: Array<string> = [
   "Most Upvotes",
@@ -26,7 +26,7 @@ const Feedbacks: React.FC = () => {
   // get data from redux
   const data = useAppSelector((state) => state.data.value);
   // make a copy, then render and sort the copy
-  const [dataCopy, setDataCopy] = useState([...data]);
+  const [dataCopy, setDataCopy] = useState<any>([...data]);
 
   const dispatch = useAppDispatch();
 
@@ -38,20 +38,21 @@ const Feedbacks: React.FC = () => {
     setHamburgerIsOpen((prevState) => !prevState);
   };
 
+  console.log(data);
   const changeSortBy = (value: string) => {
     if (value === "Most Upvotes") {
       setCurrentOption("Most Upvotes");
       let mostUpvotes = dataCopy.sort(
         (a: any, b: any) => b.upvotes - a.upvotes
       );
-      setDataCopy((prevState) => [...(prevState = mostUpvotes)]);
+      setDataCopy((prevState: any) => [...(prevState = mostUpvotes)]);
     }
     if (value === "Least Upvotes") {
       setCurrentOption("Least Upvotes");
       let leastUpvotes = dataCopy.sort(
         (a: any, b: any) => a.upvotes - b.upvotes
       );
-      setDataCopy((prevState) => [...(prevState = leastUpvotes)]);
+      setDataCopy((prevState: any) => [...(prevState = leastUpvotes)]);
     }
     if (value === "Most Comments") {
       setCurrentOption("Most Comments");
@@ -64,7 +65,7 @@ const Feedbacks: React.FC = () => {
       let sortDefined = definedComments
         .sort((a: any, b: any) => b.comments.length - a.comments.length)
         .concat(undefinedComments);
-      setDataCopy((prevState) => [...(prevState = sortDefined)]);
+      setDataCopy((prevState: any) => [...(prevState = sortDefined)]);
     }
   };
 
@@ -77,6 +78,7 @@ const Feedbacks: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (!dataCopy) return <div>Loading...</div>;
   return (
     <>
       {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
