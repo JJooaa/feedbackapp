@@ -5,40 +5,30 @@ import { ReactComponent as NewFeedBackIcon } from "../../assets/shared/icon-new-
 import OptionList from "../../components/OptionList/OptionList";
 import { useState } from "react";
 import Button from "../../components/Button/Button";
-import { useAppDispatch, addData } from "../../redux/dataSlice";
+import { useAppDispatch, addData, useAppSelector } from "../../redux/dataSlice";
 interface Values {
   title: string;
   category: string;
-  detail: string;
+  description: string;
 }
 
 const options = ["Feature", "UI", "UX", "Enhancement", "Bug"];
 
-const initialValues = {
-  title: "",
-  category: "",
-  detail: "",
-};
-
 const CreateFeedBack: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const test = () =>
-    dispatch(
-      addData({
-        id: 55,
-        title: "Add some new shit",
-        category: "enhancement",
-        upvotes: 50,
-        status: "suggestion",
-        description: "would be cool to add new shit",
-      })
-    );
+  const data = useAppSelector((state) => state.data.value);
 
   // what is the chosen value
   const [currentOption, setCurrentOption] = useState("Feature");
   // is the options menu open?
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+  const initialValues = {
+    title: "",
+    category: currentOption,
+    description: "",
+  };
 
   const handleIsOpen = () => {
     setIsOptionsOpen((prevState) => !prevState);
@@ -58,8 +48,17 @@ const CreateFeedBack: React.FC = () => {
               { setSubmitting }: FormikHelpers<Values>
             ) => {
               setTimeout(() => {
-                console.log(values);
-              }, 200);
+                dispatch(
+                  addData({
+                    ...values,
+                    id: data.length + 1,
+                    upvotes: 0,
+                    comments: [],
+                    status: "suggestion",
+                  })
+                );
+                setSubmitting(false);
+              }, 1000);
             }}
           >
             <Form>
@@ -73,8 +72,8 @@ const CreateFeedBack: React.FC = () => {
                 <label>Category</label>
                 <p className="create-p">Choose a category for your feedback</p>
                 <Field
-                  id="category"
-                  name="category"
+                  id={currentOption}
+                  name={currentOption}
                   value={currentOption}
                   onClick={() => handleIsOpen()}
                 />
@@ -95,10 +94,10 @@ const CreateFeedBack: React.FC = () => {
                   Include any specific comments on what should be improved,
                   added, etc.
                 </p>
-                <Field id="detail" name="detail" as="textarea" />
+                <Field id="description" name="description" as="textarea" />
               </label>
-              <div className="form-buttons" onClick={test}>
-                <Button text="Add Feedback" link="" color="#AD1FEA" />
+              <div className="form-buttons">
+                <Button text="Add Feedback" link="" color="#AD1FEA" type="submit"/>
                 <Button text="Cancel" link="/feedbacks" color="#3A4374" />
               </div>
             </Form>

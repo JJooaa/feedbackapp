@@ -10,7 +10,7 @@ const PostReply = () => {
 
   return (
     <div>
-      <textarea ref={textAreaRef} placeholder="Type your reply here"></textarea>
+      <textarea ref={textAreaRef} placeholder="Type your reply here" />
       <Button text="Post Reply" color="#AD1FEA" link="" />
     </div>
   );

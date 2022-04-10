@@ -4,13 +4,15 @@ interface Props {
   text: string;
   color: string;
   link: string;
+  type?: string;
 }
 
-const Button = ({ text, color, link }: Props) => {
+const Button = ({ text, color, link, type }: Props) => {
   let navigate = useNavigate();
 
   return (
     <button
+      type={type === "submit" ? "submit" : undefined}
       onClick={() => navigate(link, { replace: true })}
       style={{ backgroundColor: color }}
       className="feedback-button"

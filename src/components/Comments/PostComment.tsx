@@ -1,60 +1,30 @@
 import React, { useRef, useState } from "react";
-import { addData, useAppDispatch } from "../../redux/dataSlice";
+import { useAppDispatch } from "../../redux/dataSlice";
 import Button from "../Button/Button";
+import { addComment } from "../../redux/dataSlice";
+import { useParams } from "react-router-dom";
 
-interface User {
-  username: string;
-  name: string;
-  image: string;
-}
-interface Props {
-  setItem: any;
-  comment: {
-    content: string;
-    id: number;
-    user: User;
-    replies?: {}[];
-  }[];
-}
-const PostComment: React.FC<Props> = ({ setItem, comment }) => {
+const PostComment: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const { id } = useParams();
+
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
   const [state, setState] = useState<number>(0);
 
-  const addComment = () =>
-    dispatch(
-      addData({
-        content: "swag",
-        id: 22,
-        user: {
-          username: "joa",
-          name: "joa",
-          image: "./assets/user-images/image-jackson.jpg",
-        },
-        replies: [],
-      })
-    );
+  const postComment = () => {
+    dispatch(addComment({ id: Number(id), text: textAreaRef.current?.value }));
+    if (textAreaRef.current?.value) {
+      textAreaRef.current.value = "";
+      setState(0);
+    }
+  };
 
   const handleValueChange = (): void => {
     if (textAreaRef.current?.value.length !== undefined) {
       setState(textAreaRef.current.value.length);
     }
-  };
-
-  const onSubmitClick = () => {
-    // setItem((prevState: any) => [
-    //   ...prevState[0].comments,
-    //   {
-    //     id: 12,
-    //     content: "this is a comment",
-    //     user: {
-    //       image: "./assets/user-images/image-jackson.jpg",
-    //       name: "Jackson Barker",
-    //       username: "countryspirit",
-    //     },
-    //   },
-    // ]);
-    setItem({});
   };
 
   return (
@@ -67,10 +37,10 @@ const PostComment: React.FC<Props> = ({ setItem, comment }) => {
         maxLength={250}
         ref={textAreaRef}
         onChange={handleValueChange}
-      ></textarea>
+      />
       <div>
         <p>{250 - state} characters left</p>
-        <span onClick={addComment}>
+        <span onClick={postComment}>
           <Button text="Post Comment" color="#AD1FEA" link="" />
         </span>
       </div>

@@ -11,7 +11,6 @@ import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
-import store from "../../redux/store";
 
 const options: Array<string> = [
   "Most Upvotes",
@@ -43,14 +42,16 @@ const Feedbacks: React.FC = () => {
     if (value === "Most Upvotes") {
       setCurrentOption("Most Upvotes");
       let mostUpvotes = dataCopy.sort(
-        (a: any, b: any) => b.upvotes - a.upvotes
+        (a: { upvotes: number }, b: { upvotes: number }) =>
+          b.upvotes - a.upvotes
       );
       setDataCopy((prevState: any) => [...(prevState = mostUpvotes)]);
     }
     if (value === "Least Upvotes") {
       setCurrentOption("Least Upvotes");
       let leastUpvotes = dataCopy.sort(
-        (a: any, b: any) => a.upvotes - b.upvotes
+        (a: { upvotes: number }, b: { upvotes: number }) =>
+          a.upvotes - b.upvotes
       );
       setDataCopy((prevState: any) => [...(prevState = leastUpvotes)]);
     }

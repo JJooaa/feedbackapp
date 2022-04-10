@@ -8,7 +8,6 @@ interface User {
   image: string;
 }
 interface Props {
-  setItem?: any;
   comment: {
     content: "string";
     id: number;
@@ -17,17 +16,16 @@ interface Props {
   }[];
 }
 
-const CommentList = ({ comment, setItem }: Props) => {
+const CommentList = ({ comment }: Props) => {
   return (
     <>
       <div className="comments-wrapper">
         <h1>{comment ? comment.length : 0} Comments</h1>
-        {comment &&
-          comment.map((item, index) => (
-            <SingleComment key={index} index={index} item={item} />
-          ))}
+        {comment.map((item, index) => (
+          <SingleComment key={index} item={item} />
+        ))}
       </div>
-      <PostComment setItem={setItem} comment={comment} />
+      <PostComment />
     </>
   );
 };
