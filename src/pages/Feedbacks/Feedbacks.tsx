@@ -27,17 +27,16 @@ const Feedbacks: React.FC = () => {
   // make a copy, then render and sort the copy
   const [dataCopy, setDataCopy] = useState<any>([...data]);
 
-  const dispatch = useAppDispatch();
-
   const [isHamburgerOpen, setHamburgerIsOpen] = useState(false);
+
   const [isSortByOpen, setIsSortByOpen] = useState(false);
+
   const [currentOption, setCurrentOption] = useState("Most Upvotes");
 
   const onHamburgerClick = () => {
     setHamburgerIsOpen((prevState) => !prevState);
   };
 
-  console.log(data);
   const changeSortBy = (value: string) => {
     if (value === "Most Upvotes") {
       setCurrentOption("Most Upvotes");
@@ -58,10 +57,10 @@ const Feedbacks: React.FC = () => {
     if (value === "Most Comments") {
       setCurrentOption("Most Comments");
       let undefinedComments = dataCopy.filter(
-        (item: any) => item.comments === undefined
+        (item: { comments: [] }) => item.comments === undefined
       );
       let definedComments = dataCopy.filter(
-        (item: any) => item.comments !== undefined
+        (item: { comments: [] }) => item.comments !== undefined
       );
       let sortDefined = definedComments
         .sort((a: any, b: any) => b.comments.length - a.comments.length)
@@ -80,6 +79,7 @@ const Feedbacks: React.FC = () => {
   }, []);
 
   if (!dataCopy) return <div>Loading...</div>;
+
   return (
     <>
       {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
@@ -128,8 +128,8 @@ const Feedbacks: React.FC = () => {
 
       <main className="main">
         {dataCopy.length !== 0 ? (
-          dataCopy.map((item: any, index: number) => (
-            <SuggestionCard key={index} item={item} page="feedbacks" />
+          dataCopy.map((item: any) => (
+            <SuggestionCard key={item.id} item={item} page="feedbacks" />
           ))
         ) : (
           <Empty />

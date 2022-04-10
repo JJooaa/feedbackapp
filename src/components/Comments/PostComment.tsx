@@ -13,19 +13,19 @@ const PostComment: React.FC = () => {
 
   const [state, setState] = useState<number>(0);
 
-  const postComment = () => {
+  function postComment() {
     dispatch(addComment({ id: Number(id), text: textAreaRef.current?.value }));
     if (textAreaRef.current?.value) {
       textAreaRef.current.value = "";
       setState(0);
     }
-  };
+  }
 
-  const handleValueChange = (): void => {
+  function handleValueChange() {
     if (textAreaRef.current?.value.length !== undefined) {
       setState(textAreaRef.current.value.length);
     }
-  };
+  }
 
   return (
     <div className="leave-comment-container">

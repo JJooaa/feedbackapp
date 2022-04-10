@@ -74,6 +74,12 @@
     }
   }
 }
+.upvote {
+  cursor: pointer;
+  &:hover {
+    background: #cfd7ff;
+  }
+}
 // comment buble if tablet or above
 .comment {
   flex-grow: 1;

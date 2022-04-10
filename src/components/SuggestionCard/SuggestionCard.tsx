@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./suggestioncard.scss";
 import upArrow from "../../assets/shared/icon-arrow-up.svg";
 import commentsIcon from "../../assets/shared/icon-comments.svg";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
+import { upvotePost, useAppDispatch } from "../../redux/dataSlice";
+
 interface Props {
   item: {
     title: string;
@@ -19,9 +21,14 @@ interface Props {
 
 const SuggestionCard: React.FC<Props> = ({ item, page }) => {
   const { width } = useWindowSize();
+
+  const [upvotes, setUpvotes] = useState(item.upvotes);
+
   const returnCommentsLength = (commentsArray: object[]): number => {
     return commentsArray === undefined ? 0 : commentsArray.length;
   };
+
+  const dispatch = useAppDispatch();
 
   const firstLetterToUpperCase = (data: string): string => {
     let array = data.split("");
@@ -32,7 +39,7 @@ const SuggestionCard: React.FC<Props> = ({ item, page }) => {
   const renderMobileVersion = () => {
     return (
       <div className="data">
-        <div className="info-container bubble category">
+        <div className="info-container bubble category upvote">
           <img alt="arrow pointing up" src={upArrow} />
           <span>{item.upvotes}</span>
         </div>
@@ -62,9 +69,12 @@ const SuggestionCard: React.FC<Props> = ({ item, page }) => {
       ) : (
         // desktop version
         <>
-          <div className="info-container bubble order1">
+          <div
+            onClick={() => dispatch(upvotePost(Number(item.id)))}
+            className="info-container bubble order1 upvote"
+          >
             <img alt="arrow pointing up" src={upArrow} />
-            <span>{item.upvotes}</span>
+            <span>{upvotes}</span>
           </div>
           <div className="info-container comment">
             <img src={commentsIcon} alt="chat bubble" />

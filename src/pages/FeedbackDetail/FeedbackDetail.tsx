@@ -12,6 +12,8 @@ const FeedbackDetail = () => {
     state.data.value.filter((item: { id: number }) => item.id === Number(id))
   );
 
+  if (id === "edit") return <div>Wrong url</div>;
+
   console.log(selectedItem);
   if (!selectedItem) return <main className="main">Error...</main>;
 
