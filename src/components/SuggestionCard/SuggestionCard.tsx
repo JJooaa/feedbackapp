@@ -4,7 +4,11 @@ import upArrow from "../../assets/shared/icon-arrow-up.svg";
 import commentsIcon from "../../assets/shared/icon-comments.svg";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-import { upvotePost, useAppDispatch } from "../../redux/dataSlice";
+import {
+  upvotePost,
+  useAppDispatch,
+  useAppSelector,
+} from "../../redux/dataSlice";
 
 interface Props {
   item: {
@@ -21,8 +25,6 @@ interface Props {
 
 const SuggestionCard: React.FC<Props> = ({ item, page }) => {
   const { width } = useWindowSize();
-
-  const [upvotes, setUpvotes] = useState(item.upvotes);
 
   const returnCommentsLength = (commentsArray: object[]): number => {
     return commentsArray === undefined ? 0 : commentsArray.length;
@@ -74,7 +76,7 @@ const SuggestionCard: React.FC<Props> = ({ item, page }) => {
             className="info-container bubble order1 upvote"
           >
             <img alt="arrow pointing up" src={upArrow} />
-            <span>{upvotes}</span>
+            <span>{item.upvotes}</span>
           </div>
           <div className="info-container comment">
             <img src={commentsIcon} alt="chat bubble" />

@@ -8,8 +8,6 @@ interface Props {
   // array that we loop over
   array: Array<string>;
   // handles the sorting order in Feedbacks
-  changeSortBy?: (value: string) => void;
-  // close or open
   handleIsOpen: () => void;
   // Depending on page either "feedbacks" or "create" -> different functionality
   page: string;
@@ -21,7 +19,6 @@ interface Props {
 
 const OptionList: React.FC<Props> = ({
   array,
-  changeSortBy,
   handleIsOpen,
   page,
   currentOption,
@@ -36,11 +33,10 @@ const OptionList: React.FC<Props> = ({
 
   // if we are on page "feedbacks" -> change the sort order and close window on click
   const handleFeedbacksOnClick = (item: string): void => {
-    if (page === "feedbacks" && changeSortBy && handleIsOpen) {
+    if (page === "feedbacks" && setCurrentOption && handleIsOpen) {
       // closes window onClick
       handleIsOpen();
-      // changes sort order and the value which we show
-      changeSortBy(item);
+      setCurrentOption(item);
     }
     // if we are on page "create" we dont have to sort anything, just change the value
     if (page === "create" && setCurrentOption && handleIsOpen) {

@@ -11,6 +11,9 @@
   @media screen and (min-width: 700px) {
     position: initial;
   }
+  @media screen and (min-width: 1000px) {
+    width: auto;
+  }
 
   nav {
     z-index: 100;
@@ -25,6 +28,9 @@
       flex-direction: row;
       width: 100%;
       justify-content: center;
+    }
+    @media screen and (min-width: 1000px) {
+      flex-direction: column;
     }
 
     .features-ul {
@@ -47,6 +53,10 @@
         color: #4661e6;
         font-size: 13px;
         font-weight: bold;
+        cursor: pointer;
+        &:hover {
+          background: #cfd7ff;
+        }
       }
     }
   }

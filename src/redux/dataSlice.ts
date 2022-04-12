@@ -59,16 +59,19 @@ const dataSlice = createSlice({
         (post: { id: number }) => post.id === action.payload
       );
       let hasPersonUpvoted = state.user.upvotes.includes(action.payload);
-      console.log(hasPersonUpvoted);
+      // upvote
       if (clickedPost && !hasPersonUpvoted) {
-        console.log("plus");
         clickedPost.upvotes += 1;
+        // using a user.upvotes array to see what we have already upvoted
         state.user.upvotes.push(action.payload);
       }
-      if (hasPersonUpvoted && clickedPost) {
-        console.log("minus");
+      // remove upvote
+      if (clickedPost && hasPersonUpvoted) {
         clickedPost.upvotes -= 1;
-        // state.user.upvotes
+        // find the index of the suggestion id and save it
+        const removeIndex = state.user.upvotes.indexOf(action.payload);
+        // remove the index ie suggestion
+        state.user.upvotes.splice(removeIndex, 1);
       }
     },
   },

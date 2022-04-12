@@ -11,6 +11,7 @@ import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
+import { current } from "@reduxjs/toolkit";
 
 const options: Array<string> = [
   "Most Upvotes",
@@ -23,49 +24,48 @@ const Feedbacks: React.FC = () => {
   const { width } = useWindowSize();
 
   // get data from redux
-  const data = useAppSelector((state) => state.data.value);
-  // make a copy, then render and sort the copy
-  const [dataCopy, setDataCopy] = useState<any>([...data]);
+  const data = useAppSelector((state: any) => state.data.value);
 
   const [isHamburgerOpen, setHamburgerIsOpen] = useState(false);
-
   const [isSortByOpen, setIsSortByOpen] = useState(false);
-
   const [currentOption, setCurrentOption] = useState("Most Upvotes");
 
   const onHamburgerClick = () => {
     setHamburgerIsOpen((prevState) => !prevState);
   };
 
-  const changeSortBy = (value: string) => {
-    if (value === "Most Upvotes") {
-      setCurrentOption("Most Upvotes");
-      let mostUpvotes = dataCopy.sort(
-        (a: { upvotes: number }, b: { upvotes: number }) =>
-          b.upvotes - a.upvotes
-      );
-      setDataCopy((prevState: any) => [...(prevState = mostUpvotes)]);
+  const mostUpvotes: any = [...data].sort(
+    (a: { upvotes: number }, b: { upvotes: number }) => b.upvotes - a.upvotes
+  );
+
+  const leastUpvotes: any = [...mostUpvotes].reverse();
+
+  const handleSortByComments = () => {
+    let undefinedComments = [...data].filter(
+      (item: { comments: [] }) => item.comments === undefined
+    );
+    let definedComments = [...data].filter(
+      (item: { comments: [] }) => item.comments !== undefined
+    );
+    let sortDefined = definedComments
+      .sort((a: any, b: any) => b.comments.length - a.comments.length)
+      .concat(undefinedComments);
+    if (currentOption === "Most Comments") {
+      return sortDefined;
     }
-    if (value === "Least Upvotes") {
-      setCurrentOption("Least Upvotes");
-      let leastUpvotes = dataCopy.sort(
-        (a: { upvotes: number }, b: { upvotes: number }) =>
-          a.upvotes - b.upvotes
-      );
-      setDataCopy((prevState: any) => [...(prevState = leastUpvotes)]);
+    if (currentOption === "Least Comments") {
+      return sortDefined.reverse();
     }
-    if (value === "Most Comments") {
-      setCurrentOption("Most Comments");
-      let undefinedComments = dataCopy.filter(
-        (item: { comments: [] }) => item.comments === undefined
-      );
-      let definedComments = dataCopy.filter(
-        (item: { comments: [] }) => item.comments !== undefined
-      );
-      let sortDefined = definedComments
-        .sort((a: any, b: any) => b.comments.length - a.comments.length)
-        .concat(undefinedComments);
-      setDataCopy((prevState: any) => [...(prevState = sortDefined)]);
+  };
+
+  const currentArrayRender = () => {
+    if (currentOption === "Most Upvotes") {
+      return mostUpvotes;
+    }
+    if (currentOption === "Least Upvotes") {
+      return leastUpvotes;
+    } else {
+      return handleSortByComments();
     }
   };
 
@@ -73,30 +73,8 @@ const Feedbacks: React.FC = () => {
     setIsSortByOpen((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    changeSortBy("Most Upvotes");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!dataCopy) return <div>Loading...</div>;
-
-  return (
-    <>
-      {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
-      {width < 700 && (
-        <header className="header">
-          <div>
-            <h1>Frontend Mentor</h1>
-            <h2>Feedback Board</h2>
-          </div>
-          <img
-            src={isHamburgerOpen === false ? hamburger : close}
-            alt="hamburger menu"
-            onClick={onHamburgerClick}
-          />
-        </header>
-      )}
-
+  const renderSecondHeader = () => {
+    return (
       <div className="secondheader">
         <p>
           Sort by :
@@ -111,11 +89,11 @@ const Feedbacks: React.FC = () => {
         </p>
         {isSortByOpen && (
           <OptionList
-            changeSortBy={changeSortBy}
             array={options}
             handleIsOpen={handleIsOpen}
             page="feedbacks"
             currentOption={currentOption}
+            setCurrentOption={setCurrentOption}
           />
         )}
 
@@ -125,17 +103,41 @@ const Feedbacks: React.FC = () => {
           link="/feedbacks/create"
         />
       </div>
+    );
+  };
 
+  return (
+    <div
+      style={
+        width > 1000 ? { display: "flex", justifyContent: "center" } : undefined
+      }
+    >
+      {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
+      {width < 700 && (
+        <header className="header">
+          <div>
+            <h1>Frontend Mentor</h1>
+            <h2>Feedback Board</h2>
+          </div>
+          <img
+            src={isHamburgerOpen === false ? hamburger : close}
+            alt="hamburger menu"
+            onClick={onHamburgerClick}
+          />
+        </header>
+      )}
+      {width < 740 && renderSecondHeader()}
       <main className="main">
-        {dataCopy.length !== 0 ? (
-          dataCopy.map((item: any) => (
+        {width > 740 && renderSecondHeader()}
+        {data.length !== 0 ? (
+          currentArrayRender().map((item: any) => (
             <SuggestionCard key={item.id} item={item} page="feedbacks" />
           ))
         ) : (
           <Empty />
         )}
       </main>
-    </>
+    </div>
   );
 };
 

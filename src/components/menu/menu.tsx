@@ -13,17 +13,21 @@ const features: Array<string> = [
   "Feature",
 ];
 
+// Either hamburger menu / tablet header or desktop header /
 const Menu: React.FC = () => {
   const data = useAppSelector((state) => state.data.value);
 
   const { width } = useWindowSize();
 
+  // planned suggestions array
   const planned = data.filter(
     (item: { status?: string }) => item.status === "planned"
   );
+  // inprogress suggestions array
   const inProgress = data.filter(
     (item: { status?: string }) => item.status === "in-progress"
   );
+  // live suggestions array
   const live = data.filter(
     (item: { status?: string }) => item.status === "live"
   );
@@ -43,11 +47,13 @@ const Menu: React.FC = () => {
             <li key={index}>{item}</li>
           ))}
         </ul>
+
         <div className="roadmap">
           <div className="link-wrapper">
             <h1>Roadmap</h1>
             <Link to="/roadmap">View</Link>
           </div>
+
           <ul className="roadmap-status">
             <li>
               Planned<span>{planned.length}</span>

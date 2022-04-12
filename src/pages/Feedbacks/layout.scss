@@ -8,17 +8,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   img {
     cursor: pointer;
   }
-  
+
   div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: white;
-    
+
     h1,
     h2 {
       font-size: 14px;
@@ -42,8 +42,12 @@
   @media screen and (min-width: 700px) {
     border-radius: 10px;
     max-width: 720px;
+    height: 72px;
   }
-  
+  @media screen and (min-width: 1000px) {
+    max-width: 825px;
+  }
+
   p {
     font-weight: 300;
     display: flex;
@@ -51,7 +55,7 @@
       font-size: 14px;
     }
   }
-  
+
   span {
     font-weight: 600;
     display: flex;
@@ -70,4 +74,8 @@
   max-width: 730px;
   margin: 0 auto;
   gap: 20px;
+  @media screen and (min-width: 1000px) {
+    margin: 0;
+    max-width: 825px;
+  }
 }
