@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./layout.scss";
+import "./feedbacks.scss";
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import Menu from "../../components/Menu/Menu";
 import close from "../../assets/shared/mobile/icon-close.svg";
@@ -7,7 +7,7 @@ import Button from "../../components/Button/Button";
 import { ReactComponent as DownArrow } from "../../assets/shared/icon-arrow-down.svg";
 import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
 import Empty from "../../components/Empty/Empty";
-import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
+import SuggestionCard from "../../components/FeedbackCard/FeedbackCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppSelector } from "../../redux/dataSlice";
@@ -20,7 +20,7 @@ const options: Array<string> = [
   "Least Comments",
 ];
 
-const Feedbacks: React.FC = () => {
+const Feedbacks = () => {
   const { width } = useWindowSize();
   // get data from redux
   const data = useAppSelector((state: any) => state.data.value);
@@ -73,10 +73,23 @@ const Feedbacks: React.FC = () => {
     setIsSortByOpen((prevState) => !prevState);
   };
 
+  const renderMobileHeader = () => {
+    <header className="feedbacks-header">
+      <div>
+        <h1>Frontend Mentor</h1>
+        <h2>Feedback Board</h2>
+      </div>
+      <img
+        src={isHamburgerOpen === false ? hamburger : close}
+        alt="hamburger menu"
+        onClick={onHamburgerClick}
+      />
+    </header>;
+  };
   // tablet and desktop header
-  const renderSecondHeader = () => {
+  const renderProgressiveHeader = () => {
     return (
-      <div className="secondheader">
+      <header className="feedbacks-second-header">
         {width > 700 && (
           <h2>
             <Bulb />
@@ -110,36 +123,17 @@ const Feedbacks: React.FC = () => {
           color="#AD1FEA"
           link="/feedbacks/create"
         />
-      </div>
+      </header>
     );
   };
 
   return (
-    <div
-      style={
-        width > 1000
-          ? { display: "flex", justifyContent: "center", marginTop: 60 }
-          : undefined
-      }
-    >
+    <div className="feedbacks">
       {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
-      {width < 700 && (
-        //mobile header
-        <header className="header">
-          <div>
-            <h1>Frontend Mentor</h1>
-            <h2>Feedback Board</h2>
-          </div>
-          <img
-            src={isHamburgerOpen === false ? hamburger : close}
-            alt="hamburger menu"
-            onClick={onHamburgerClick}
-          />
-        </header>
-      )}
-      {width < 740 && renderSecondHeader()}
-      <main className="main">
-        {width > 740 && renderSecondHeader()}
+      {width < 700 && renderMobileHeader()}
+      {width < 740 && renderProgressiveHeader()}
+      <main className="feedbacks-content-main">
+        {width > 740 && renderProgressiveHeader()}
         {data.length !== 0 ? (
           currentArrayRender().map((item: any) => (
             <SuggestionCard key={item.id} item={item} page="feedbacks" />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PostReply from "./PostReply";
 
 interface User {
@@ -12,11 +12,14 @@ interface Props {
     id: number;
     content: string;
     user: User;
-    replies?: {}[];
+    replies?: {
+      content: string;
+    }[];
   };
+  children: any;
 }
 
-const SingleComment = ({ item }: Props) => {
+const SingleComment: React.FC<Props> = ({ item, children }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
 
   const handleReplyClick = (): void => {
@@ -42,6 +45,7 @@ const SingleComment = ({ item }: Props) => {
       </div>
       <p>{item.content}</p>
       {isReplying && <PostReply />}
+      {children}
     </div>
   );
 };

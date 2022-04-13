@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
-import GoBackHeader from "../../components/GoBackHeader/GoBackHeader";
-import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
+import SuggestionCard from "../../components/FeedbackCard/FeedbackCard";
 import { useAppSelector } from "../../redux/dataSlice";
 import "./roadmap.scss";
+import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
+import { Link } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const Roadmap = () => {
   const { width } = useWindowSize();
@@ -22,88 +24,101 @@ const Roadmap = () => {
     (item: { status?: string }) => item.status === "live"
   );
 
+  // based on currentSelect prop we decide which of the array to render
+  // and we have the necessary setup properties based on objects
   const options = [
     {
       text: "Planned",
-      number: planned.length,
+      arrayLength: planned.length,
       description: "Ideas prioritized for research",
       item: planned,
     },
     {
       text: "In-Progress",
-      number: inProgress.length,
+      arrayLength: inProgress.length,
       description: "Currently being developed",
       item: inProgress,
     },
     {
       text: "Live",
-      number: live.length,
+      arrayLength: live.length,
       description: "Released features",
       item: live,
     },
   ];
-  // returns the current items in relation to currently selected option
-  const array = options.filter((item) => item.text === currentSelect);
+
+  // return options.item based on (currentSelect === "Planned") ->  {
+  //   text: "Planned",
+  //   number: planned.length,
+  //   description: "Ideas prioritized for research",
+  //   item: planned,
+  // },
+  const array = options.filter((item) => currentSelect === item.text);
 
   // renders border top color based on currentOption eg. Planned -> orange
-  const borderTopColoring = (item: { status?: string }) => {
+  const borderTopColoringTablet = (item: { status?: string }) => {
     let value = "suggestion-card-top";
     if (item.status === "planned") return "orange " + value;
     if (item.status === "in-progress") return "purple " + value;
     if (item.status === "live") return "blue " + value;
   };
 
-  const renderCurrentSelectCards = () => {
-    return array[0].item.map((item: any, index: number) => (
-      <div className={borderTopColoring(item)}>
-        <SuggestionCard key={index} item={item} page="roadmap" />
-      </div>
-    ));
+  // renders correct ::after pseudo element color for mobile
+  const afterPseudoElementMobile = (item: { text: string }) => {
+    return width < 700 && item.text === currentSelect
+      ? `default active ${currentSelect.toLowerCase()}`
+      : "default";
   };
 
-  // renders correct ::after pseudo element color based on currentOption
-  const afterPseudoElement = (item: { text: string }) => {
-    if (width < 700 && item.text === currentSelect) {
-      return `default active ${currentSelect.toLowerCase()}`;
-    }
-    if (width > 700) {
-      return "default large";
-    } else {
-      return "default";
-    }
+  const renderMobileDescription = () => {
+    return (
+      width < 700 &&
+      array.map((item) => (
+        <p className="array-description">
+          {item.text} ({item.arrayLength})<p>{item.description}</p>
+        </p>
+      ))
+    );
   };
 
   return (
     <>
-      <GoBackHeader page="roadmap" />
-      <nav className="roadmap-nav">
+      <header className="roadmap-header">
+        <Link to="/feedbacks">
+          <img src={arrowLeft} alt="arrow-left" />
+          Go Back
+          <h2>Roadmap</h2>
+        </Link>
+
+        <Button
+          text="+ Add Feedback"
+          color="#AD1FEA"
+          link="/feedbacks/create"
+        />
+      </header>
+
+      <nav className="roadmap-second-header">
         <ul>
           {options.map((item, index) => (
             <li
               key={index}
-              className={afterPseudoElement(item)}
+              className={afterPseudoElementMobile(item)}
               onClick={() => setCurrentSelect(item.text)}
             >
-              {item.text} ({item.number})
+              {item.text} ({item.arrayLength})
               {width > 700 && <p>{item.description}</p>}
             </li>
           ))}
         </ul>
       </nav>
-      <main className="main" style={{ margin: "auto" }}>
-        <div>
-          {width < 700 &&
-            array.map((item) => (
-              <div className="current-select">
-                {item.text} ({item.number})<p>{item.description}</p>
-              </div>
-            ))}
-        </div>
-        {/* {width > 700 &&
-          options.map((item) =>
-            item.item.map((element: any) => <div>{element.title}</div>)
-          )} */}
-        {renderCurrentSelectCards()}
+
+      <main className="roadmap-main">
+        {renderMobileDescription()}
+        {array[0].item.map((item: any, index: number) => (
+          <div className={borderTopColoringTablet(item)}>
+            <SuggestionCard key={index} item={item} page="roadmap" />
+          </div>
+        ))}
       </main>
     </>
   );

@@ -12,7 +12,9 @@ interface Props {
     content: "string";
     id: number;
     user: User;
-    replies?: {}[];
+    replies?: {
+      content: string;
+    }[];
   }[];
 }
 
@@ -23,7 +25,12 @@ const CommentList = ({ comment }: Props) => {
         <h1>{comment ? comment.length : 0} Comments</h1>
         {comment &&
           comment.map((item, index) => (
-            <SingleComment key={index} item={item} />
+            <>
+              <SingleComment key={index} item={item}>
+                {item.replies &&
+                  item.replies.map((reply) => <p>{reply.content}</p>)}
+              </SingleComment>
+            </>
           ))}
       </div>
       <PostComment />
