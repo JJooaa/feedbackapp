@@ -48,11 +48,18 @@
     max-width: 825px;
   }
 
+  h2 {
+    font-size: 18px;
+    display: flex;
+    gap: 16px;
+  }
   p {
     font-weight: 300;
     display: flex;
+    flex-grow: 1;
     @media screen and (min-width: 700px) {
       font-size: 14px;
+      margin-left: 38px;
     }
   }
 

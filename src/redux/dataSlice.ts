@@ -44,13 +44,19 @@ const dataSlice = createSlice({
       const currentPost = state.value.find(
         (post: { id: number }) => post.id === id
       );
-      if (currentPost) {
-        currentPost.comments.push({
-          id: 123123,
-          content: text,
-          user: data.currentUser,
-          replies: [],
-        });
+      const newComment = {
+        id: 123123,
+        content: text,
+        user: data.currentUser,
+        replies: [],
+      };
+      if (currentPost.comments) {
+        currentPost.comments.push(newComment);
+      }
+      // if there are no comments, the array doesnt exist, so make a new array
+      if (!currentPost.comments) {
+        currentPost.comments = [];
+        currentPost.comments.push(newComment);
       }
     },
 

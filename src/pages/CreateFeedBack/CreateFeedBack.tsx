@@ -36,8 +36,10 @@ const CreateFeedBack: React.FC = () => {
 
   return (
     <>
-      <main className="main">
-        <GoBackHeader page="create" />
+      <main className="main" style={{ margin: "auto" }}>
+        <div style={{ width: 600, margin: "auto", paddingBottom: 30 }}>
+          <GoBackHeader page="create" />
+        </div>
         <div className="create-container">
           <NewFeedBackIcon className="add-icon" />
           <h1>Create New Feedback</h1>
@@ -97,7 +99,12 @@ const CreateFeedBack: React.FC = () => {
                 <Field id="description" name="description" as="textarea" />
               </label>
               <div className="form-buttons">
-                <Button text="Add Feedback" link="" color="#AD1FEA" type="submit"/>
+                <Button
+                  text="Add Feedback"
+                  link=""
+                  color="#AD1FEA"
+                  type="submit"
+                />
                 <Button text="Cancel" link="/feedbacks" color="#3A4374" />
               </div>
             </Form>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./layout.scss";
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import Menu from "../../components/Menu/Menu";
@@ -10,8 +10,8 @@ import Empty from "../../components/Empty/Empty";
 import SuggestionCard from "../../components/SuggestionCard/SuggestionCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
-import { useAppDispatch, useAppSelector } from "../../redux/dataSlice";
-import { current } from "@reduxjs/toolkit";
+import { useAppSelector } from "../../redux/dataSlice";
+import { ReactComponent as Bulb } from "../../assets/suggestions/tablet/bulb 2.svg";
 
 const options: Array<string> = [
   "Most Upvotes",
@@ -22,7 +22,6 @@ const options: Array<string> = [
 
 const Feedbacks: React.FC = () => {
   const { width } = useWindowSize();
-
   // get data from redux
   const data = useAppSelector((state: any) => state.data.value);
 
@@ -58,6 +57,7 @@ const Feedbacks: React.FC = () => {
     }
   };
 
+  // returns an array of the current sorted items
   const currentArrayRender = () => {
     if (currentOption === "Most Upvotes") {
       return mostUpvotes;
@@ -73,20 +73,28 @@ const Feedbacks: React.FC = () => {
     setIsSortByOpen((prevState) => !prevState);
   };
 
+  // tablet and desktop header
   const renderSecondHeader = () => {
     return (
       <div className="secondheader">
+        {width > 700 && (
+          <h2>
+            <Bulb />
+            {data.length} Suggestions
+          </h2>
+        )}
         <p>
           Sort by :
           <span onClick={handleIsOpen}>
             {currentOption}
             {isSortByOpen === false ? (
-              <DownArrow className="arrow" />
+              <DownArrow stroke="white" />
             ) : (
-              <UpArrow className="arrow" />
+              <UpArrow stroke="white" />
             )}
           </span>
         </p>
+
         {isSortByOpen && (
           <OptionList
             array={options}
@@ -109,11 +117,14 @@ const Feedbacks: React.FC = () => {
   return (
     <div
       style={
-        width > 1000 ? { display: "flex", justifyContent: "center" } : undefined
+        width > 1000
+          ? { display: "flex", justifyContent: "center", marginTop: 60 }
+          : undefined
       }
     >
       {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
       {width < 700 && (
+        //mobile header
         <header className="header">
           <div>
             <h1>Frontend Mentor</h1>

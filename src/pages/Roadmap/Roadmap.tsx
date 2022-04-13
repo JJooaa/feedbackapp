@@ -90,7 +90,7 @@ const Roadmap = () => {
           ))}
         </ul>
       </nav>
-      <main className="main">
+      <main className="main" style={{ margin: "auto" }}>
         <div>
           {width < 700 &&
             array.map((item) => (

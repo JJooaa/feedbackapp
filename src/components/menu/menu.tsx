@@ -56,13 +56,17 @@ const Menu: React.FC = () => {
 
           <ul className="roadmap-status">
             <li>
-              Planned<span>{planned.length}</span>
+              <span className="dot orange-d"></span>Planned
+              <span className="status-number">{planned.length}</span>
             </li>
             <li>
-              In-progress<span>{inProgress.length}</span>
+              <span className="dot purple-d"></span>
+              In-progress
+              <span className="status-number">{inProgress.length}</span>
             </li>
             <li>
-              Live<span>{live.length}</span>
+              <span className="dot blue-d"></span>
+              Live<span className="status-number">{live.length}</span>
             </li>
           </ul>
         </div>

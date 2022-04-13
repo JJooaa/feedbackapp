@@ -21,9 +21,10 @@ const CommentList = ({ comment }: Props) => {
     <>
       <div className="comments-wrapper">
         <h1>{comment ? comment.length : 0} Comments</h1>
-        {comment.map((item, index) => (
-          <SingleComment key={index} item={item} />
-        ))}
+        {comment &&
+          comment.map((item, index) => (
+            <SingleComment key={index} item={item} />
+          ))}
       </div>
       <PostComment />
     </>

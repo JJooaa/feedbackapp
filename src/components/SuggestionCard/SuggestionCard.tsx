@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./suggestioncard.scss";
-import upArrow from "../../assets/shared/icon-arrow-up.svg";
+import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
 import commentsIcon from "../../assets/shared/icon-comments.svg";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
@@ -38,11 +38,20 @@ const SuggestionCard: React.FC<Props> = ({ item, page }) => {
     return [firstLetter, ...array.slice(1, array.length)].join("");
   };
 
+  const upvotesStatus = useAppSelector((state) => state.data.user.upvotes);
+
+  const handleUpvotes = () => {
+    if (upvotesStatus.includes(item.id)) {
+      return "upvoted";
+    }
+  };
+
+  handleUpvotes();
   const renderMobileVersion = () => {
     return (
       <div className="data">
         <div className="info-container bubble category upvote">
-          <img alt="arrow pointing up" src={upArrow} />
+          <UpArrow stroke="#4661E6" />
           <span>{item.upvotes}</span>
         </div>
         <div className="info-container">
@@ -75,7 +84,7 @@ const SuggestionCard: React.FC<Props> = ({ item, page }) => {
             onClick={() => dispatch(upvotePost(Number(item.id)))}
             className="info-container bubble order1 upvote"
           >
-            <img alt="arrow pointing up" src={upArrow} />
+            <UpArrow stroke="#4661E6" />
             <span>{item.upvotes}</span>
           </div>
           <div className="info-container comment">

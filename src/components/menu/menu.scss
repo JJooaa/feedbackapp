@@ -10,9 +10,11 @@
   justify-content: flex-end;
   @media screen and (min-width: 700px) {
     position: initial;
+    margin-top: 32px;
   }
   @media screen and (min-width: 1000px) {
     width: auto;
+    margin-top: 8px;
   }
 
   nav {
@@ -44,6 +46,9 @@
       gap: 14px;
       align-items: center;
       padding: 24px 18px 36px 24px;
+      @media screen and (min-width: 1030px) {
+        width: 255px;
+      }
 
       li {
         width: fit-content;
@@ -70,6 +75,9 @@
     padding: 24px;
     flex-direction: column;
     gap: 24px;
+    @media screen and (min-width: 1030px) {
+      width: 255px;
+    }
 
     .link-wrapper {
       width: 100%;
@@ -93,12 +101,31 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
       li {
         display: flex;
         justify-content: space-between;
         color: #647196;
         font-weight: 400;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        align-self: center;
+        border-radius: 50%;
+        margin-right: 16px;
+      }
+      .orange-d {
+        background: #f49f85;
+      }
+      .purple-d {
+        background: #ad1fea;
+      }
+      .blue-d {
+        background: #62bcfa;
+      }
+      .status-number {
+        flex-grow: 1;
+        text-align: right;
       }
     }
   }
@@ -114,6 +141,11 @@
   border-radius: 10px;
   padding: 24px;
   background: url("../../assets/suggestions/tablet/background-header.png");
+  @media screen and (min-width: 1030px) {
+    background: url("../../assets/suggestions/desktop/background-header.png");
+    height: 137px;
+    width: 255px;
+  }
   h1 {
     font-size: 20px;
   }
