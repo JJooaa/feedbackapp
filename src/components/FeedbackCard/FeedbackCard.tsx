@@ -4,11 +4,7 @@ import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg
 import commentsIcon from "../../assets/shared/icon-comments.svg";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-import {
-  upvotePost,
-  useAppDispatch,
-  useAppSelector,
-} from "../../slices/dataSlice";
+import { upvotePost, useAppDispatch } from "../../slices/dataSlice";
 
 interface Props {
   item: {

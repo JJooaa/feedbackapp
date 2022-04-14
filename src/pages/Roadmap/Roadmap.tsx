@@ -74,9 +74,9 @@ const Roadmap = () => {
     return (
       width < 700 &&
       array.map((item) => (
-        <p className="array-description">
+        <div className="array-description">
           {item.text} ({item.arrayLength})<p>{item.description}</p>
-        </p>
+        </div>
       ))
     );
   };

@@ -1,8 +1,10 @@
 .feedbacks {
+  @media screen and (min-width: 700px) {
+    margin-top: 60px;
+  }
   @media screen and (min-width: 1000px) {
     display: flex;
     justify-content: center;
-    margin-top: 60;
   }
 
   .feedbacks-header {
@@ -95,5 +97,3 @@
     }
   }
 }
-
-

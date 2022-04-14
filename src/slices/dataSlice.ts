@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { AppDispatch, RootState } from "../app/store";
 import data from "../data.json";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
@@ -13,32 +13,34 @@ interface Data {
   };
 }
 
+interface NewFeedback {
+  category: string;
+  description: string;
+  title: string;
+}
+
 const initialState: Data = {
   value: data.productRequests,
   user: data.currentUser,
 };
 
-// comments: ({
-//   id: number;
-//   content: string;
-//   user: {
-//       image: string;
-//       name: string;
-//       username: string;
-//   };
-//   replies?: undefined;
-
 const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    addData: (state, action: PayloadAction<any>) => {
-      state.value.push(action.payload);
+    addData: (state, action: PayloadAction<NewFeedback>) => {
+      state.value.push({
+        ...action.payload,
+        id: state.value.length + 1,
+        upvotes: 0,
+        comments: [],
+        status: "suggestion",
+      });
     },
 
     addComment: (
       state,
-      action: PayloadAction<{ id: number; text?: string }>
+      action: PayloadAction<{ id: number; text: string | undefined }>
     ) => {
       const { id, text } = action.payload;
       const currentPost = state.value.find(

@@ -5,16 +5,12 @@ import { Link } from "react-router-dom";
 import OptionList from "../../components/OptionList/OptionList";
 import { useState } from "react";
 import Button from "../../components/Button/Button";
-import {
-  useAppDispatch,
-  addData,
-  useAppSelector,
-} from "../../slices/dataSlice";
+import { useAppDispatch, addData } from "../../slices/dataSlice";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
+import { validationSchema } from "../../helpers";
 
 interface Values {
   title: string;
-  category: string;
   description: string;
 }
 
@@ -23,19 +19,16 @@ const options = ["Feature", "UI", "UX", "Enhancement", "Bug"];
 const CreateFeedBack: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const data = useAppSelector((state) => state.data.value);
-
-  // what is the chosen value
-  const [currentOption, setCurrentOption] = useState("Feature");
-  // is the options menu open?
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+  const [currentOption, setCurrentOption] = useState("Feature");
 
   const initialValues = {
     title: "",
-    category: currentOption,
     description: "",
   };
 
+  console.log("hello");
   const handleIsOpen = () => {
     setIsOptionsOpen((prevState) => !prevState);
   };
@@ -57,70 +50,81 @@ const CreateFeedBack: React.FC = () => {
 
         <Formik
           initialValues={initialValues}
+          validationSchema={validationSchema}
           onSubmit={(
             values: Values,
             { setSubmitting }: FormikHelpers<Values>
           ) => {
-            setTimeout(() => {
-              dispatch(
-                addData({
-                  ...values,
-                  id: data.length + 1,
-                  upvotes: 0,
-                  comments: [],
-                  status: "suggestion",
-                })
-              );
-              setSubmitting(false);
-            }, 1000);
+            dispatch(addData({ ...values, category: currentOption }));
+            setSubmitting(false);
           }}
         >
-          <Form>
-            <label>
-              Feedback Title
-              <p>Add a short, descriptive headline</p>
-              <Field id="title" name="title" />
-            </label>
-
-            <div>
-              <label>Category</label>
-              <p>Choose a category for your feedback</p>
-              <Field
-                id={currentOption}
-                name={currentOption}
-                value={currentOption}
-                onClick={() => handleIsOpen()}
-              />
-              {isOptionsOpen && (
-                <OptionList
-                  page="create"
-                  array={options}
-                  currentOption={currentOption}
-                  setCurrentOption={setCurrentOption}
-                  handleIsOpen={handleIsOpen}
+          {({ errors, touched }) => (
+            <Form>
+              <div>
+                <label>Feedback Title</label>
+                <p>Add a short, descriptive headline</p>
+                <Field
+                  id="title"
+                  name="title"
+                  style={
+                    errors.title && touched.title === true
+                      ? { outline: "1px solid red" }
+                      : null
+                  }
                 />
-              )}
-            </div>
+                <ErrorMessage className="error" name="title" component="div" />
+              </div>
 
-            <label>
-              Feedback Detail
-              <p>
-                Include any specific comments on what should be improved, added,
-                etc.
-              </p>
-              <Field id="description" name="description" as="textarea" />
-            </label>
+              <div>
+                <label>Category</label>
+                <p>Choose a category for your feedback</p>
+                <Field value={currentOption} onClick={handleIsOpen} />
+                {isOptionsOpen && (
+                  <OptionList
+                    page="create"
+                    array={options}
+                    currentOption={currentOption}
+                    setCurrentOption={setCurrentOption}
+                    handleIsOpen={handleIsOpen}
+                  />
+                )}
+              </div>
 
-            <div className="create-feedback-form-buttons">
-              <Button
-                text="Add Feedback"
-                link=""
-                color="#AD1FEA"
-                type="submit"
-              />
-              <Button text="Cancel" link="/feedbacks" color="#3A4374" />
-            </div>
-          </Form>
+              <div>
+                <label>Feedback Detail</label>
+                <p>
+                  Include any specific comments on what should be improved,
+                  added, etc.
+                </p>
+                <Field
+                  id="description"
+                  name="description"
+                  as="textarea"
+                  style={
+                    errors.description && touched.description === true
+                      ? { outline: "1px solid red" }
+                      : null
+                  }
+                />
+                <ErrorMessage
+                  className="error"
+                  name="description"
+                  component="div"
+                />
+              </div>
+
+              <div className="create-feedback-form-buttons">
+                <Button
+                  text="Add Feedback"
+                  link=""
+                  color="#AD1FEA"
+                  type="submit"
+                />
+                <Button text="Cancel" link="/feedbacks" color="#3A4374" />
+              </div>
+            </Form>
+          )}
         </Formik>
       </div>
     </main>

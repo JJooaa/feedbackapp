@@ -15,7 +15,6 @@ interface Props {
     replyingTo?: string;
     replies?: {
       content: string;
-      replyingTo?: string;
     }[];
   };
 }

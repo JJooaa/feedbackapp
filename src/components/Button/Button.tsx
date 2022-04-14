@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./button.scss";
+
 interface Props {
   text: string;
   color: string;
