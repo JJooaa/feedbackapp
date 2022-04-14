@@ -2,7 +2,7 @@ import SuggestionCard from "../../components/FeedbackCard/FeedbackCard";
 import "./feedbackdetail.scss";
 import { Link, useParams } from "react-router-dom";
 import CommentList from "../../components/Comments/CommentList";
-import { useAppSelector } from "../../redux/dataSlice";
+import { useAppSelector } from "../../slices/dataSlice";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import Button from "../../components/Button/Button";
 

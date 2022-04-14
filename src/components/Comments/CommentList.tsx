@@ -14,23 +14,25 @@ interface Props {
     user: User;
     replies?: {
       content: string;
+      replyingTo: string;
     }[];
   }[];
 }
 
 const CommentList = ({ comment }: Props) => {
+  console.log(comment);
   return (
     <>
       <div className="comments-wrapper">
         <h1>{comment ? comment.length : 0} Comments</h1>
         {comment &&
           comment.map((item, index) => (
-            <>
-              <SingleComment key={index} item={item}>
-                {item.replies &&
-                  item.replies.map((reply) => <p>{reply.content}</p>)}
-              </SingleComment>
-            </>
+            <SingleComment key={index} props={item}>
+              {item.replies &&
+                item.replies.map((reply: any, idx) => (
+                  <SingleComment key={idx} props={reply}></SingleComment>
+                ))}
+            </SingleComment>
           ))}
       </div>
       <PostComment />

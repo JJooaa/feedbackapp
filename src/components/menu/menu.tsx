@@ -2,7 +2,7 @@ import React from "react";
 import "./menu.scss";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-import { useAppSelector } from "../../redux/dataSlice";
+import { useAppSelector } from "../../slices/dataSlice";
 
 const features: Array<string> = [
   "All",

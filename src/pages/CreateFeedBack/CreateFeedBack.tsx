@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import OptionList from "../../components/OptionList/OptionList";
 import { useState } from "react";
 import Button from "../../components/Button/Button";
-import { useAppDispatch, addData, useAppSelector } from "../../redux/dataSlice";
+import {
+  useAppDispatch,
+  addData,
+  useAppSelector,
+} from "../../slices/dataSlice";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 
 interface Values {

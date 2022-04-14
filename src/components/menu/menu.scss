@@ -11,6 +11,7 @@
   @media screen and (min-width: 700px) {
     position: initial;
     margin-top: 32px;
+    background: none;
   }
   @media screen and (min-width: 1000px) {
     width: auto;
@@ -19,7 +20,7 @@
 
   nav {
     z-index: 100;
-    width: 70%;
+    width: 270px;
     background: #f7f8fd;
     height: 100%;
     display: flex;

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import { useAppDispatch } from "../../redux/dataSlice";
+import { useAppDispatch } from "../../slices/dataSlice";
 import Button from "../Button/Button";
-import { addComment } from "../../redux/dataSlice";
+import { addComment } from "../../slices/dataSlice";
 import { useParams } from "react-router-dom";
 
 const PostComment: React.FC = () => {

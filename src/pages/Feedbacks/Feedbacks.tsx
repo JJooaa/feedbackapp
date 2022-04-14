@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./feedbacks.scss";
 import hamburger from "../../assets/shared/mobile/icon-hamburger.svg";
 import Menu from "../../components/Menu/Menu";
@@ -10,7 +10,7 @@ import Empty from "../../components/Empty/Empty";
 import SuggestionCard from "../../components/FeedbackCard/FeedbackCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
-import { useAppSelector } from "../../redux/dataSlice";
+import { useAppSelector } from "../../slices/dataSlice";
 import { ReactComponent as Bulb } from "../../assets/suggestions/tablet/bulb 2.svg";
 
 const options: Array<string> = [
@@ -22,7 +22,7 @@ const options: Array<string> = [
 
 const Feedbacks = () => {
   const { width } = useWindowSize();
-  // get data from redux
+
   const data = useAppSelector((state: any) => state.data.value);
 
   const [isHamburgerOpen, setHamburgerIsOpen] = useState(false);
@@ -33,6 +33,8 @@ const Feedbacks = () => {
     setHamburgerIsOpen((prevState) => !prevState);
   };
 
+  //--------------------------------------------------------------------------------//
+  // Handle the sorting logic here
   const mostUpvotes: any = [...data].sort(
     (a: { upvotes: number }, b: { upvotes: number }) => b.upvotes - a.upvotes
   );
@@ -68,24 +70,28 @@ const Feedbacks = () => {
       return handleSortByComments();
     }
   };
+  //--------------------------------------------------------------------------------//
 
   const handleIsOpen = () => {
     setIsSortByOpen((prevState) => !prevState);
   };
 
   const renderMobileHeader = () => {
-    <header className="feedbacks-header">
-      <div>
-        <h1>Frontend Mentor</h1>
-        <h2>Feedback Board</h2>
-      </div>
-      <img
-        src={isHamburgerOpen === false ? hamburger : close}
-        alt="hamburger menu"
-        onClick={onHamburgerClick}
-      />
-    </header>;
+    return (
+      <header className="feedbacks-header">
+        <div>
+          <h1>Frontend Mentor</h1>
+          <h2>Feedback Board</h2>
+        </div>
+        <img
+          src={isHamburgerOpen === false ? hamburger : close}
+          alt="hamburger menu"
+          onClick={onHamburgerClick}
+        />
+      </header>
+    );
   };
+
   // tablet and desktop header
   const renderProgressiveHeader = () => {
     return (

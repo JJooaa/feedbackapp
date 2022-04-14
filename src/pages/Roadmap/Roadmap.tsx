@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import SuggestionCard from "../../components/FeedbackCard/FeedbackCard";
-import { useAppSelector } from "../../redux/dataSlice";
+import { useAppSelector } from "../../slices/dataSlice";
 import "./roadmap.scss";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import { Link } from "react-router-dom";

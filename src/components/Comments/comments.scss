@@ -4,7 +4,7 @@
   background: white;
   border-radius: 10px;
   display: flex;
-  padding: 24px 0px;
+  padding: 24px 24px;
   flex-direction: column;
   max-width: 730px;
   margin: 0 auto;
@@ -22,7 +22,7 @@
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0px 24px;
+  padding-left: 24px;
   gap: 16px;
   margin: 12px 0px;
 
@@ -32,6 +32,10 @@
     @media screen and (min-width: 700px) {
       font-size: 15px;
     }
+  }
+  span {
+    color: #ad1fea;
+    font-weight: bold;
   }
 
   .comment-user {
@@ -107,4 +111,9 @@ textarea {
       font-size: 13px;
     }
   }
+}
+
+.replies-container {
+  margin-left: 20px;
+  border-left: 1px solid #64719636;
 }

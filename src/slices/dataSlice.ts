@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
-import type { AppDispatch, RootState } from "./store";
+import type { AppDispatch, RootState } from "../app/store";
 import data from "../data.json";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 

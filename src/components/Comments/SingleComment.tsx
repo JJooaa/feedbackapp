@@ -8,24 +8,26 @@ interface User {
 }
 
 interface Props {
-  item: {
+  props: {
     id: number;
     content: string;
     user: User;
+    replyingTo?: string;
     replies?: {
       content: string;
+      replyingTo?: string;
     }[];
   };
-  children: any;
 }
 
-const SingleComment: React.FC<Props> = ({ item, children }) => {
+const SingleComment: React.FC<Props> = ({ props, children }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
 
   const handleReplyClick = (): void => {
     setIsReplying((prevState) => !prevState);
   };
-  const image: string = item.user.image.slice(21, item.user.image.length);
+
+  const image: string = props.user.image.slice(21, props.user.image.length);
 
   return (
     <div className="comment-container">
@@ -37,15 +39,18 @@ const SingleComment: React.FC<Props> = ({ item, children }) => {
         />
         <div className="user-info-wrapper">
           <div className="user-info">
-            <h2>{item.user.name}</h2>
-            <p>@{item.user.username}</p>
+            <h2>{props.user.name}</h2>
+            <p>@{props.user.username}</p>
           </div>
           <h3 onClick={handleReplyClick}>Reply</h3>
         </div>
       </div>
-      <p>{item.content}</p>
+      <p>
+        <span>{props.replyingTo && `@${props.replyingTo}`}</span>{" "}
+        {props.content}
+      </p>
       {isReplying && <PostReply />}
-      {children}
+      {props.replies && <div className="replies-container">{children}</div>}
     </div>
   );
 };

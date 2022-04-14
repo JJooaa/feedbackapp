@@ -8,7 +8,7 @@ import {
   upvotePost,
   useAppDispatch,
   useAppSelector,
-} from "../../redux/dataSlice";
+} from "../../slices/dataSlice";
 
 interface Props {
   item: {
