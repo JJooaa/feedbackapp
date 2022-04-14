@@ -28,7 +28,6 @@ const CreateFeedBack: React.FC = () => {
     description: "",
   };
 
-  console.log("hello");
   const handleIsOpen = () => {
     setIsOptionsOpen((prevState) => !prevState);
   };

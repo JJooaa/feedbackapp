@@ -4,7 +4,11 @@ import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg
 import commentsIcon from "../../assets/shared/icon-comments.svg";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-import { upvotePost, useAppDispatch } from "../../slices/dataSlice";
+import {
+  upvotePost,
+  useAppDispatch,
+  useAppSelector,
+} from "../../slices/dataSlice";
 
 interface Props {
   item: {
@@ -22,6 +26,14 @@ interface Props {
 const FeedbackCard: React.FC<Props> = ({ item, page }) => {
   const { width } = useWindowSize();
   const dispatch = useAppDispatch();
+
+  const upvotes = useAppSelector((state) => state.data.user.upvotes);
+
+  const handleHasUpvoted = (value: string) => {
+    const isTrue = upvotes.includes(item.id);
+    if (value === "number") return isTrue ? "upvoted " : "";
+    if (value === "arrow") return isTrue ? "white" : "#4661E6";
+  };
 
   const returnCommentsLength = (commentsArray: object[]): number => {
     return commentsArray === undefined ? 0 : commentsArray.length;
@@ -87,9 +99,11 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
         </div>
         <div
           onClick={() => dispatch(upvotePost(Number(item.id)))}
-          className="info-container bubble order1 upvote"
+          className={
+            handleHasUpvoted("number") + "info-container bubble order1 upvote"
+          }
         >
-          <UpArrow stroke="#4661E6" />
+          <UpArrow stroke={handleHasUpvoted("arrow")} />
           <span>{item.upvotes}</span>
         </div>
         <div className="info-container flex-end">

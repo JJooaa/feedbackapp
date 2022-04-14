@@ -102,3 +102,10 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.upvoted {
+  background-color: #4661e6 !important;
+  span {
+    color: white;
+  }
+}
