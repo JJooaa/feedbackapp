@@ -8,13 +8,18 @@ const features: Array<string> = [
   "All",
   "UI",
   "UX",
-  "Enchancement",
+  "Enhancement",
   "Bug",
   "Feature",
 ];
 
+interface Props {
+  setCurrentCategory: (value: string) => void;
+  currentCategory: string;
+}
+
 // Either hamburger menu / tablet header or desktop header /
-const Menu: React.FC = () => {
+const Menu: React.FC<Props> = ({ setCurrentCategory, currentCategory }) => {
   const data = useAppSelector((state) => state.data.value);
 
   const { width } = useWindowSize();
@@ -44,7 +49,17 @@ const Menu: React.FC = () => {
 
         <ul className="features-ul">
           {features.map((item: string, index: number) => (
-            <li key={index}>{item}</li>
+            <li
+              style={
+                currentCategory === item
+                  ? { backgroundColor: "#4661E6", color: "white" }
+                  : undefined
+              }
+              onClick={() => setCurrentCategory(item)}
+              key={index}
+            >
+              {item}
+            </li>
           ))}
         </ul>
 
@@ -56,7 +71,8 @@ const Menu: React.FC = () => {
 
           <ul className="roadmap-status">
             <li>
-              <span className="dot orange-d"></span>Planned
+              <span className="dot orange-d"></span>
+              Planned
               <span className="status-number">{planned.length}</span>
             </li>
             <li>
@@ -66,7 +82,8 @@ const Menu: React.FC = () => {
             </li>
             <li>
               <span className="dot blue-d"></span>
-              Live<span className="status-number">{live.length}</span>
+              Live
+              <span className="status-number">{live.length}</span>
             </li>
           </ul>
         </div>

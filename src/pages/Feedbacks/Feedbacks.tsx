@@ -13,7 +13,7 @@ import { useWindowSize } from "usehooks-ts";
 import { useAppSelector } from "../../slices/dataSlice";
 import { ReactComponent as Bulb } from "../../assets/suggestions/tablet/bulb 2.svg";
 
-const options: Array<string> = [
+const options = [
   "Most Upvotes",
   "Least Upvotes",
   "Most Comments",
@@ -29,23 +29,38 @@ const Feedbacks = () => {
   const [isSortByOpen, setIsSortByOpen] = useState(false);
   const [currentOption, setCurrentOption] = useState("Most Upvotes");
 
-  const onHamburgerClick = () => {
+  const [currentCategory, setCurrentCategory] = useState("All");
+
+  function onHamburgerClick() {
     setHamburgerIsOpen((prevState) => !prevState);
-  };
+  }
 
-  //--------------------------------------------------------------------------------//
-  // Handle the sorting logic here
-  const mostUpvotes: any = [...data].sort(
-    (a: { upvotes: number }, b: { upvotes: number }) => b.upvotes - a.upvotes
-  );
+  function handleIsOpen() {
+    setIsSortByOpen((prevState) => !prevState);
+  }
 
-  const leastUpvotes: any = [...mostUpvotes].reverse();
+  function test(data: any) {
+    if (currentOption === "Most Upvotes") {
+      return data.sort(
+        (a: { upvotes: number }, b: { upvotes: number }) =>
+          b.upvotes - a.upvotes
+      );
+    }
+    if (currentOption === "Least Upvotes") {
+      return data.sort(
+        (a: { upvotes: number }, b: { upvotes: number }) =>
+          a.upvotes - b.upvotes
+      );
+    }
+    if (currentOption === "Most Comments" || currentOption === "Least Comments")
+      return handleSortByComments(data);
+  }
 
-  const handleSortByComments = () => {
-    let undefinedComments = [...data].filter(
+  function handleSortByComments(data: []) {
+    let undefinedComments = data.filter(
       (item: { comments: [] }) => item.comments === undefined
     );
-    let definedComments = [...data].filter(
+    let definedComments = data.filter(
       (item: { comments: [] }) => item.comments !== undefined
     );
     let sortDefined = definedComments
@@ -57,26 +72,18 @@ const Feedbacks = () => {
     if (currentOption === "Least Comments") {
       return sortDefined.reverse();
     }
-  };
+  }
 
-  // returns an array of the current sorted items
-  const currentArrayRender = () => {
-    if (currentOption === "Most Upvotes") {
-      return mostUpvotes;
-    }
-    if (currentOption === "Least Upvotes") {
-      return leastUpvotes;
-    } else {
-      return handleSortByComments();
-    }
-  };
-  //--------------------------------------------------------------------------------//
+  function handleCategoryChange() {
+    const singleCategory = data.filter(
+      (item: { category: string }) =>
+        item.category.toLowerCase() === currentCategory.toLowerCase()
+    );
+    if (currentCategory === "All") return test([...data]);
+    return test(singleCategory);
+  }
 
-  const handleIsOpen = () => {
-    setIsSortByOpen((prevState) => !prevState);
-  };
-
-  const renderMobileHeader = () => {
+  function renderMobileHeader() {
     return (
       <header className="feedbacks-header">
         <div>
@@ -90,10 +97,10 @@ const Feedbacks = () => {
         />
       </header>
     );
-  };
+  }
 
   // tablet and desktop header
-  const renderProgressiveHeader = () => {
+  function renderProgressiveHeader() {
     return (
       <header className="feedbacks-second-header">
         {width > 700 && (
@@ -131,17 +138,29 @@ const Feedbacks = () => {
         />
       </header>
     );
-  };
+  }
 
   return (
     <div className="feedbacks">
-      {isHamburgerOpen === true ? <Menu /> : width > 700 && <Menu />}
+      {isHamburgerOpen === true ? (
+        <Menu
+          setCurrentCategory={setCurrentCategory}
+          currentCategory={currentCategory}
+        />
+      ) : (
+        width > 700 && (
+          <Menu
+            setCurrentCategory={setCurrentCategory}
+            currentCategory={currentCategory}
+          />
+        )
+      )}
       {width < 700 && renderMobileHeader()}
       {width < 740 && renderProgressiveHeader()}
       <main className="feedbacks-content-main">
         {width > 740 && renderProgressiveHeader()}
         {data.length !== 0 ? (
-          currentArrayRender().map((item: any) => (
+          handleCategoryChange().map((item: any) => (
             <SuggestionCard key={item.id} item={item} page="feedbacks" />
           ))
         ) : (
