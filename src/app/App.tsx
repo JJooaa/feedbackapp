@@ -7,6 +7,7 @@ import CreateFeedBack from "../pages/CreateFeedBack/CreateFeedBack";
 import Roadmap from "../pages/Roadmap/Roadmap";
 import { Provider } from "react-redux";
 import store from "./store";
+import EditFeedback from "../pages/EditFeedback/EditFeedback";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           <Route path="/feedbacks/:id" element={<FeedbackDetail />} />
           <Route path="/feedbacks/create" element={<CreateFeedBack />} />
           <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/feedbacks/:id/edit" element={<EditFeedback />} />
           <Route
             path="*"
             element={

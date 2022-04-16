@@ -10,7 +10,7 @@ const FeedbackDetail = () => {
   const { id } = useParams();
 
   const selectedItem = useAppSelector((state) =>
-    state.data.value.filter((item: { id: number }) => item.id === Number(id))
+    state.data.value.find((item: { id: number }) => item.id === Number(id))
   );
 
   if (id === "edit") return <div>Wrong url</div>;
@@ -23,10 +23,14 @@ const FeedbackDetail = () => {
             <img src={arrowLeft} alt="arrow-left" />
             <Link to="/feedbacks">Go Back</Link>
           </div>
-          <Button text="Edit Feedback" color="#4661e6" link="/feedbacks/edit" />
+          <Button
+            text="Edit Feedback"
+            color="#4661e6"
+            link={`/feedbacks/${id}/edit`}
+          />
         </header>
-        <SuggestionCard item={selectedItem[0]} page="detail" />
-        <CommentList comment={selectedItem[0].comments} />
+        <SuggestionCard item={selectedItem} page="detail" />
+        <CommentList comment={selectedItem.comments} />
       </main>
     </>
   );

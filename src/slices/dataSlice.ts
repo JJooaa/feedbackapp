@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import type { AppDispatch, RootState } from "../app/store";
 import data from "../data.json";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
@@ -62,6 +62,32 @@ const dataSlice = createSlice({
       }
     },
 
+    postReply: (
+      state,
+      action: PayloadAction<{ id: number; text: string; commentId: number }>
+    ) => {
+      // id is the url/id | commentId is the clicked comment
+      const { id, text, commentId } = action.payload;
+      const currentComment = state.value.find((post: any) => post.id === id);
+      const clickedPost = currentComment.comments.find(
+        (item: any) => item.id === commentId
+      );
+
+      const newReply = {
+        id: 123123123,
+        content: text,
+        user: data.currentUser,
+        replies: [],
+      };
+      if (clickedPost.replies) {
+        clickedPost.replies.push(newReply);
+      }
+      if (!clickedPost.replies) {
+        clickedPost.replies = [];
+        clickedPost.replies.push(newReply);
+      }
+    },
+
     upvotePost: (state, action: PayloadAction<number>) => {
       const clickedPost = state.value.find(
         (post: { id: number }) => post.id === action.payload
@@ -85,7 +111,7 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addData, addComment, upvotePost } = dataSlice.actions;
+export const { addData, addComment, upvotePost, postReply } = dataSlice.actions;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 

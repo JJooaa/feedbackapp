@@ -1,11 +1,17 @@
-import "./createFeedback.scss";
-import newFeedBackIcon from "../../assets/shared/icon-new-feedback1.svg";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
+import React, { useState } from "react";
 import FormikForm from "../../components/Form/Formik";
+import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
+import { Link, useParams } from "react-router-dom";
+import editFeedBackIcon from "../../assets/shared/icon-edit-feedback.svg";
+import { useAppSelector } from "../../slices/dataSlice";
 
-const CreateFeedBack: React.FC = () => {
+const EditFeedback = () => {
+  const { id } = useParams();
+  const selectedItem = useAppSelector((state) =>
+    state.data.value.find((item: { id: number }) => item.id === Number(id))
+  );
+
+  console.log(selectedItem);
   const [currentOption, setCurrentOption] = useState("Feature");
 
   const options = ["Feature", "UI", "UX", "Enhancement", "Bug"];
@@ -24,11 +30,11 @@ const CreateFeedBack: React.FC = () => {
 
       <div className="create-feedback-form-container">
         <img
-          src={newFeedBackIcon}
+          src={editFeedBackIcon}
           className="form-add-icon"
           alt="plus sign with purple background"
         />
-        <h1>Create New Feedback</h1>
+        <h1>Editing '{selectedItem.title}'</h1>
 
         <FormikForm
           currentOption={currentOption}
@@ -41,4 +47,4 @@ const CreateFeedBack: React.FC = () => {
   );
 };
 
-export default CreateFeedBack;
+export default EditFeedback;

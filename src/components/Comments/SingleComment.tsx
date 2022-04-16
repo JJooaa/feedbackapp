@@ -48,7 +48,7 @@ const SingleComment: React.FC<Props> = ({ props, children }) => {
         <span>{props.replyingTo && `@${props.replyingTo}`}</span>{" "}
         {props.content}
       </p>
-      {isReplying && <PostReply />}
+      {isReplying && <PostReply props={props} />}
       {props.replies && <div className="replies-container">{children}</div>}
     </div>
   );
