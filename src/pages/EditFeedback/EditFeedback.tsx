@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import FormikForm from "../../components/Form/Formik";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import { Link, useParams } from "react-router-dom";
@@ -10,16 +9,6 @@ const EditFeedback = () => {
   const selectedItem = useAppSelector((state) =>
     state.data.value.find((item: { id: number }) => item.id === Number(id))
   );
-
-  console.log(selectedItem);
-  const [currentOption, setCurrentOption] = useState("Feature");
-
-  const options = ["Feature", "UI", "UX", "Enhancement", "Bug"];
-
-  const initialValues = {
-    title: "",
-    description: "",
-  };
 
   return (
     <main className="create-feedback">
@@ -36,12 +25,7 @@ const EditFeedback = () => {
         />
         <h1>Editing '{selectedItem.title}'</h1>
 
-        <FormikForm
-          currentOption={currentOption}
-          setCurrentOption={setCurrentOption}
-          initialValues={initialValues}
-          options={options}
-        />
+        <FormikForm page="edit" selectedItem={selectedItem} />
       </div>
     </main>
   );

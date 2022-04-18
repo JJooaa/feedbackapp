@@ -16,7 +16,10 @@ interface Props {
     description: string;
     category: string;
     upvotes: number;
-    comments: object[];
+    comments: {
+      id: number;
+      replies: any;
+    }[];
     status: string;
     id: number;
   };
@@ -35,7 +38,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     if (value === "arrow") return isTrue ? "white" : "#4661E6";
   };
 
-  const returnCommentsLength = (commentsArray: object[]): number => {
+  const returnCommentsLength = (commentsArray: {}[]): number => {
     return commentsArray === undefined ? 0 : commentsArray.length;
   };
 
@@ -69,9 +72,9 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
         <div className="info-texts">
           <Link to={`/feedbacks/${item.id}`}>{item.title}</Link>
           <p>{item.description}</p>
-          <div className="bubble">
-            <h2>{firstLetterToUpperCase(item.category)}</h2>
-          </div>
+        </div>
+        <div className="bubble">
+          <h2>{firstLetterToUpperCase(item.category)}</h2>
         </div>
         <div className="mobile-wrapper">
           <div className="info-container bubble upvote">

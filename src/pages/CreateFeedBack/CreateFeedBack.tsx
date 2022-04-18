@@ -1,20 +1,10 @@
 import "./createFeedback.scss";
 import newFeedBackIcon from "../../assets/shared/icon-new-feedback1.svg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import arrowLeft from "../../assets/shared/icon-arrow-left.svg";
 import FormikForm from "../../components/Form/Formik";
 
 const CreateFeedBack: React.FC = () => {
-  const [currentOption, setCurrentOption] = useState("Feature");
-
-  const options = ["Feature", "UI", "UX", "Enhancement", "Bug"];
-
-  const initialValues = {
-    title: "",
-    description: "",
-  };
-
   return (
     <main className="create-feedback">
       <Link to="/feedbacks">
@@ -30,12 +20,7 @@ const CreateFeedBack: React.FC = () => {
         />
         <h1>Create New Feedback</h1>
 
-        <FormikForm
-          currentOption={currentOption}
-          setCurrentOption={setCurrentOption}
-          initialValues={initialValues}
-          options={options}
-        />
+        <FormikForm page="create" />
       </div>
     </main>
   );

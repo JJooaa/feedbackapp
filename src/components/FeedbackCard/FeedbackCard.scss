@@ -10,6 +10,7 @@
   font-size: 13px;
   max-width: 825px;
   margin: 0 auto;
+  gap: 10px;
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
   @media screen and (max-width: 700px) {
     min-height: 200px;

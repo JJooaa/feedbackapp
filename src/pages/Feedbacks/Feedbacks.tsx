@@ -106,7 +106,7 @@ const Feedbacks = () => {
         {width > 700 && (
           <h2>
             <Bulb />
-            {data.length} Suggestions
+            {handleCategoryChange().length} Suggestions
           </h2>
         )}
         <p>
@@ -142,18 +142,17 @@ const Feedbacks = () => {
 
   return (
     <div className="feedbacks">
-      {isHamburgerOpen === true ? (
+      {isHamburgerOpen && (
         <Menu
           setCurrentCategory={setCurrentCategory}
           currentCategory={currentCategory}
         />
-      ) : (
-        width > 700 && (
-          <Menu
-            setCurrentCategory={setCurrentCategory}
-            currentCategory={currentCategory}
-          />
-        )
+      )}
+      {width > 700 && (
+        <Menu
+          setCurrentCategory={setCurrentCategory}
+          currentCategory={currentCategory}
+        />
       )}
       {width < 700 && renderMobileHeader()}
       {width < 740 && renderProgressiveHeader()}

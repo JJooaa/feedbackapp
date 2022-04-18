@@ -1,16 +1,14 @@
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
-import { Formik, Field, ErrorMessage, FormikHelpers, Form } from "formik";
+import { useNavigate } from "react-router-dom";
 import { validationSchema } from "../../helpers";
-import { useAppDispatch } from "../../slices/dataSlice";
-import { addData } from "../../slices/dataSlice";
+import { addData, editPost, useAppDispatch } from "../../slices/dataSlice";
 import Button from "../Button/Button";
 import OptionList from "../OptionList/OptionList";
 
 interface Props {
-  currentOption: string;
-  setCurrentOption: (value: string) => void;
-  initialValues: Values;
-  options: string[];
+  page: string;
+  selectedItem?: any;
 }
 
 interface Values {
@@ -18,17 +16,63 @@ interface Values {
   description: string;
 }
 
-const FormikForm: React.FC<Props> = ({
-  initialValues,
-  currentOption,
-  setCurrentOption,
-  options,
-}) => {
+const optionsStatus = ["Planned", "In-Progress", "Live"];
+const optionsCategory = ["Feature", "UI", "UX", "Enhancement", "Bug"];
+
+const FormikForm: React.FC<Props> = ({ page, selectedItem }) => {
+  let navigate = useNavigate();
+
   const dispatch = useAppDispatch();
-  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+  // ===================== Form Values ================== //
+  const initialValues = {
+    title: selectedItem ? selectedItem.title : "",
+    description: selectedItem ? selectedItem.description : "",
+  };
+  const [currentCategory, setCurrentCategory] = useState("Feature");
+
+  // IF EDIT FORM
+  const [currentStatus, setCurrentStatus] = useState("Planned");
+
+  // =================================================== //
+
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
 
   const handleIsOpen = () => {
-    setIsOptionsOpen((prevState) => !prevState);
+    setIsCategoryOpen((prevState) => !prevState);
+  };
+
+  const handleUpdateOpen = () => {
+    setIsUpdateOpen((prevState) => !prevState);
+  };
+
+  const handleSubmit = (
+    values: Values,
+    setSubmitting: (value: boolean) => void
+  ) => {
+    if (page === "create") {
+      dispatch(
+        addData({
+          ...values,
+          category: currentCategory,
+        })
+      );
+      setSubmitting(false);
+      navigate("/feedbacks");
+    }
+    if (page === "edit") {
+      dispatch(
+        editPost({
+          ...values,
+          id: selectedItem.id,
+          category: currentCategory,
+          status: currentStatus,
+        })
+      );
+      setSubmitting(false);
+      navigate("/feedbacks");
+    }
   };
 
   return (
@@ -36,8 +80,7 @@ const FormikForm: React.FC<Props> = ({
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-        dispatch(addData({ ...values, category: currentOption }));
-        setSubmitting(false);
+        handleSubmit(values, setSubmitting);
       }}
     >
       {({ errors, touched }) => (
@@ -57,21 +100,34 @@ const FormikForm: React.FC<Props> = ({
             <ErrorMessage className="error" name="title" component="div" />
           </div>
 
-          <div>
+          <div className="relative">
             <label>Category</label>
             <p>Choose a category for your feedback</p>
-            <Field value={currentOption} onClick={handleIsOpen} />
-            {isOptionsOpen && (
+            <Field value={currentCategory} onClick={handleIsOpen} />
+            {isCategoryOpen && (
               <OptionList
-                page="create"
-                array={options}
-                currentOption={currentOption}
-                setCurrentOption={setCurrentOption}
+                array={optionsCategory}
+                currentOption={currentCategory}
+                setCurrentOption={setCurrentCategory}
                 handleIsOpen={handleIsOpen}
               />
             )}
           </div>
-
+          {page === "edit" && (
+            <div className="relative">
+              <label>Update Status</label>
+              <p>Change feedback state</p>
+              <Field value={currentStatus} onClick={handleUpdateOpen} />
+              {isUpdateOpen && (
+                <OptionList
+                  array={optionsStatus}
+                  currentOption={currentStatus}
+                  setCurrentOption={setCurrentStatus}
+                  handleIsOpen={handleUpdateOpen}
+                />
+              )}
+            </div>
+          )}
           <div>
             <label>Feedback Detail</label>
             <p>
@@ -96,9 +152,16 @@ const FormikForm: React.FC<Props> = ({
           </div>
 
           <div className="create-feedback-form-buttons">
-            <Button text="Add Feedback" link="" color="#AD1FEA" type="submit" />
+            <Button
+              text={page === "create" ? "Add Feedback" : "Save Changes"}
+              link=""
+              color="#AD1FEA"
+              type="submit"
+            />
             <Button text="Cancel" link="/feedbacks" color="#3A4374" />
-            <Button text="Delete" link="/feedbacks" color="#D73737" />
+            {page === "edit" && (
+              <Button text="Delete" link="/feedbacks" color="#D73737" />
+            )}
           </div>
         </Form>
       )}

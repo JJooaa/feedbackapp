@@ -14,9 +14,11 @@ interface Data {
 }
 
 interface NewFeedback {
+  id?: number;
   category: string;
   description: string;
   title: string;
+  status?: string;
 }
 
 const initialState: Data = {
@@ -64,10 +66,15 @@ const dataSlice = createSlice({
 
     postReply: (
       state,
-      action: PayloadAction<{ id: number; text: string; commentId: number }>
+      action: PayloadAction<{
+        id: number;
+        content: string;
+        commentId: number;
+        replyingTo: string;
+      }>
     ) => {
       // id is the url/id | commentId is the clicked comment
-      const { id, text, commentId } = action.payload;
+      const { id, content, commentId, replyingTo } = action.payload;
       const currentComment = state.value.find((post: any) => post.id === id);
       const clickedPost = currentComment.comments.find(
         (item: any) => item.id === commentId
@@ -75,7 +82,8 @@ const dataSlice = createSlice({
 
       const newReply = {
         id: 123123123,
-        content: text,
+        content: content,
+        replyingTo: replyingTo,
         user: data.currentUser,
         replies: [],
       };
@@ -108,10 +116,38 @@ const dataSlice = createSlice({
         state.user.upvotes.splice(removeIndex, 1);
       }
     },
+
+    editPost: (state, action: PayloadAction<NewFeedback>) => {
+      const { id, category, status, title, description } = action.payload;
+      const postToEdit = state.value.find(
+        (post: { id: number }) => post.id === id
+      );
+      if (postToEdit) {
+        postToEdit.title = title;
+        postToEdit.status = status;
+        postToEdit.category = category;
+        postToEdit.description = description;
+      }
+    },
+
+    removePost: (state, action: PayloadAction<number>) => {
+      const postToRemove = state.value.find(
+        (post: { id: number }) => post.id === action.payload
+      );
+      const index = state.value.indexOf(postToRemove);
+      state.value.splice(index, 1);
+    },
   },
 });
 
-export const { addData, addComment, upvotePost, postReply } = dataSlice.actions;
+export const {
+  addData,
+  addComment,
+  upvotePost,
+  postReply,
+  editPost,
+  removePost,
+} = dataSlice.actions;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 

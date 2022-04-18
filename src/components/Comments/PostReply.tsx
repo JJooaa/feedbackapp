@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import { postReply, useAppDispatch } from "../../slices/dataSlice";
 import { useParams } from "react-router-dom";
@@ -19,16 +19,25 @@ interface Props {
       content: string;
     }[];
   };
+  handleReplyClick: () => void;
 }
-const PostReply: React.FC<Props> = ({ props }) => {
+
+const PostReply: React.FC<Props> = ({ props, handleReplyClick }) => {
   const { id } = useParams();
-
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
   const dispatch = useAppDispatch();
+  const [value, setValue] = useState("");
 
   const addPost = () => {
-    dispatch(postReply({ id: Number(id), text: "hello", commentId: props.id }));
+    dispatch(
+      postReply({
+        id: Number(id),
+        content: value,
+        commentId: props.id,
+        replyingTo: props.user.username,
+      })
+    );
+    handleReplyClick();
   };
 
   useEffect(() => {
@@ -37,7 +46,11 @@ const PostReply: React.FC<Props> = ({ props }) => {
 
   return (
     <div>
-      <textarea ref={textAreaRef} placeholder="Type your reply here" />
+      <textarea
+        ref={textAreaRef}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Type your reply here"
+      />
       <span onClick={addPost}>
         <Button text="Post Reply" color="#AD1FEA" link="" />
       </span>
