@@ -12,7 +12,7 @@
   margin: 0 auto;
   gap: 10px;
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-  @media screen and (max-width: 700px) {
+  @media screen and (min-width: 700px) {
     min-height: 200px;
   }
   // 151px on desktop
@@ -30,6 +30,11 @@
 
   li {
     list-style-type: none;
+    span {
+      &:last-child {
+        color: #647196;
+      }
+    }
   }
 
   .info-texts {

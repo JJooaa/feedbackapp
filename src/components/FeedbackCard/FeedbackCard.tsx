@@ -66,7 +66,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
         {page === "roadmap" && (
           <li>
             <span className={handleDot()}></span>
-            <span>{firstLetterToUpperCase(item.status)}</span>
+            <span className="">{firstLetterToUpperCase(item.status)}</span>
           </li>
         )}
         <div className="info-texts">
