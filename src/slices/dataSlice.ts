@@ -76,23 +76,25 @@ const dataSlice = createSlice({
       // id is the url/id | commentId is the clicked comment
       const { id, content, commentId, replyingTo } = action.payload;
       const currentComment = state.value.find((post: any) => post.id === id);
-      const clickedPost = currentComment.comments.find(
+      const clickedComment = currentComment.comments.find(
         (item: any) => item.id === commentId
       );
 
+      console.log(current(currentComment));
+
       const newReply = {
-        id: 123123123,
+        id: id,
         content: content,
         replyingTo: replyingTo,
         user: data.currentUser,
         replies: [],
       };
-      if (clickedPost.replies) {
-        clickedPost.replies.push(newReply);
+      if (clickedComment.replies) {
+        clickedComment.replies.push(newReply);
       }
-      if (!clickedPost.replies) {
-        clickedPost.replies = [];
-        clickedPost.replies.push(newReply);
+      if (!clickedComment.replies) {
+        clickedComment.replies = [];
+        clickedComment.replies.push(newReply);
       }
     },
 

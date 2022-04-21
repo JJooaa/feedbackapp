@@ -2,7 +2,12 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validationSchema } from "../../helpers";
-import { addData, editPost, useAppDispatch } from "../../slices/dataSlice";
+import {
+  addData,
+  editPost,
+  removePost,
+  useAppDispatch,
+} from "../../slices/dataSlice";
 import Button from "../Button/Button";
 import OptionList from "../OptionList/OptionList";
 
@@ -45,6 +50,10 @@ const FormikForm: React.FC<Props> = ({ page, selectedItem }) => {
 
   const handleUpdateOpen = () => {
     setIsUpdateOpen((prevState) => !prevState);
+  };
+
+  const handleDelete = () => {
+    dispatch(removePost(selectedItem.id));
   };
 
   const handleSubmit = (
@@ -160,7 +169,12 @@ const FormikForm: React.FC<Props> = ({ page, selectedItem }) => {
             />
             <Button text="Cancel" link="/feedbacks" color="#3A4374" />
             {page === "edit" && (
-              <Button text="Delete" link="/feedbacks" color="#D73737" />
+              <Button
+                text="Delete"
+                link="/feedbacks"
+                color="#D73737"
+                handleDelete={handleDelete}
+              />
             )}
           </div>
         </Form>

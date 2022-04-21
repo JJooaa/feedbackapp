@@ -72,14 +72,27 @@ const Roadmap = () => {
 
   const renderMobileDescription = () => {
     return (
-      width < 700 &&
-      array.map((item) => (
-        <div className="array-description">
-          {item.text} ({item.arrayLength})<p>{item.description}</p>
-        </div>
-      ))
+      <div className="array-description">
+        {array[0].text} ({array[0].arrayLength})<p>{array[0].description}</p>
+      </div>
     );
   };
+
+  const tester = () => {
+    return (
+      <div className="tester-container">
+        {Object.values(options).map((option) => (
+          <div>
+            {option.item.map((x: any) => (
+              <SuggestionCard item={x} page="roadmap" />
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  tester();
 
   return (
     <>
@@ -113,12 +126,14 @@ const Roadmap = () => {
       </nav>
 
       <main className="roadmap-main">
-        {renderMobileDescription()}
-        {array[0].item.map((item: any, index: number) => (
-          <div className={borderTopColoringTablet(item)}>
-            <SuggestionCard key={index} item={item} page="roadmap" />
-          </div>
-        ))}
+        {width < 700 && renderMobileDescription()}
+        {width < 700 &&
+          array[0].item.map((item: any, index: number) => (
+            <div className={borderTopColoringTablet(item)}>
+              <SuggestionCard key={index} item={item} page="roadmap" />
+            </div>
+          ))}
+        {width > 700 && tester()}
       </main>
     </>
   );

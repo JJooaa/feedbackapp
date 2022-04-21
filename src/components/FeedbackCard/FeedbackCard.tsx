@@ -66,7 +66,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
         {page === "roadmap" && (
           <li>
             <span className={handleDot()}></span>
-            <span className="">{firstLetterToUpperCase(item.status)}</span>
+            <span>{firstLetterToUpperCase(item.status)}</span>
           </li>
         )}
         <div className="info-texts">
@@ -77,8 +77,13 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
           <h2>{firstLetterToUpperCase(item.category)}</h2>
         </div>
         <div className="mobile-wrapper">
-          <div className="info-container bubble upvote">
-            <UpArrow stroke="#4661E6" />
+          <div
+            onClick={() => dispatch(upvotePost(Number(item.id)))}
+            className={
+              handleHasUpvoted("number") + "info-container bubble upvote"
+            }
+          >
+            <UpArrow stroke={handleHasUpvoted("arrow")} />
             <span>{item.upvotes}</span>
           </div>
           <div className="info-container">

@@ -44,6 +44,7 @@ const PostReply: React.FC<Props> = ({ props, handleReplyClick }) => {
     textAreaRef.current?.focus();
   }, []);
 
+  console.log(props.id);
   return (
     <div>
       <textarea

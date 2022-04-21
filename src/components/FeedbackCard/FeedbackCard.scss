@@ -12,9 +12,6 @@
   margin: 0 auto;
   gap: 10px;
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-  @media screen and (min-width: 700px) {
-    min-height: 200px;
-  }
   // 151px on desktop
   @media screen and (min-width: 700px) {
     height: 150px !important;
@@ -22,10 +19,10 @@
     justify-content: flex-start;
     gap: 40px;
     align-items: center;
-  }
-  &:hover {
-    box-shadow: 0px 5px 5px 3px gainsboro;
-    transform: translateY(-5px);
+    &:hover {
+      box-shadow: 0px 5px 5px 3px gainsboro;
+      transform: translateY(-5px);
+    }
   }
 
   li {
