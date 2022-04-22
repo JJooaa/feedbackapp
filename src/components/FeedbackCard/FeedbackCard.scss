@@ -12,18 +12,6 @@
   margin: 0 auto;
   gap: 10px;
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-  // 151px on desktop
-  @media screen and (min-width: 700px) {
-    height: 150px !important;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 40px;
-    align-items: center;
-    &:hover {
-      box-shadow: 0px 5px 5px 3px gainsboro;
-      transform: translateY(-5px);
-    }
-  }
 
   li {
     list-style-type: none;
@@ -40,7 +28,7 @@
     gap: 10px;
     p {
       color: #647196;
-      @media screen and (min-width: 700px) {
+      @media screen and (min-width: 768px) {
         font-size: 16px;
       }
     }
@@ -52,7 +40,7 @@
       text-decoration: none;
       cursor: pointer;
 
-      @media screen and (min-width: 700px) {
+      @media screen and (min-width: 768px) {
         font-size: 18px;
       }
     }
@@ -92,7 +80,7 @@
     font-weight: bold;
     color: #3a4374;
     span {
-      @media screen and (min-width: 700px) {
+      @media screen and (min-width: 768px) {
         font-size: 16px;
       }
     }
@@ -115,5 +103,19 @@
   background-color: #4661e6 !important;
   span {
     color: white;
+  }
+}
+
+.responsive {
+  @media screen and (min-width: 768px) {
+    height: 150px !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 40px;
+    align-items: center;
+    &:hover {
+      box-shadow: 0px 5px 5px 3px gainsboro;
+      transform: translateY(-5px);
+    }
   }
 }

@@ -40,7 +40,7 @@ const Menu: React.FC<Props> = ({ setCurrentCategory, currentCategory }) => {
   return (
     <div className="wrapper">
       <nav>
-        {width > 700 && (
+        {width > 768 && (
           <div className="tablet-logo">
             <h1>Frontend Mentor</h1>
             <h2>Feedback Board</h2>

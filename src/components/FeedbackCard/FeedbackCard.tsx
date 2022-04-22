@@ -95,7 +95,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     );
   };
 
-  const renderTabletDesktopVersion = () => {
+  const renderResponsiveVersion = () => {
     return (
       <>
         <div className="info-texts">
@@ -122,9 +122,19 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     );
   };
 
+  const renderFeedbackCard = () => {
+    if (page === "roadmap") return renderMobileVersion();
+    if (width > 768) return renderResponsiveVersion();
+    if (width < 768) return renderMobileVersion();
+  };
+
   return (
-    <div className="feedbackcard">
-      {width < 700 ? renderMobileVersion() : renderTabletDesktopVersion()}
+    <div
+      className={
+        page !== "roadmap" ? "feedbackcard responsive" : "feedbackcard"
+      }
+    >
+      {renderFeedbackCard()}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 .feedbacks {
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 768px) {
     margin-top: 60px;
   }
   @media screen and (min-width: 1000px) {
@@ -48,7 +48,7 @@
     position: relative;
     font-size: 13px;
     margin: 0 auto;
-    @media screen and (min-width: 700px) {
+    @media screen and (min-width: 768px) {
       border-radius: 10px;
       max-width: 720px;
       height: 72px;
@@ -67,7 +67,7 @@
       font-weight: 300;
       display: flex;
       flex-grow: 1;
-      @media screen and (min-width: 700px) {
+      @media screen and (min-width: 768px) {
         font-size: 14px;
         margin-left: 38px;
       }

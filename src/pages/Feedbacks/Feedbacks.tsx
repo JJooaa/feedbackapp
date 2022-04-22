@@ -103,7 +103,7 @@ const Feedbacks = () => {
   function renderProgressiveHeader() {
     return (
       <header className="feedbacks-second-header">
-        {width > 700 && (
+        {width > 768 && (
           <h2>
             <Bulb />
             {handleCategoryChange().length} Suggestions
@@ -148,16 +148,16 @@ const Feedbacks = () => {
           currentCategory={currentCategory}
         />
       )}
-      {width > 700 && (
+      {width > 768 && (
         <Menu
           setCurrentCategory={setCurrentCategory}
           currentCategory={currentCategory}
         />
       )}
-      {width < 700 && renderMobileHeader()}
-      {width < 740 && renderProgressiveHeader()}
+      {width < 768 && renderMobileHeader()}
+      {width < 768 && renderProgressiveHeader()}
       <main className="feedbacks-content-main">
-        {width > 740 && renderProgressiveHeader()}
+        {width > 768 && renderProgressiveHeader()}
         {data.length !== 0 ? (
           handleCategoryChange().map((item: any) => (
             <SuggestionCard key={item.id} item={item} page="feedbacks" />

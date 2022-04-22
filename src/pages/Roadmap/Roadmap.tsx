@@ -56,7 +56,7 @@ const Roadmap = () => {
   const array = options.filter((item) => currentSelect === item.text);
 
   // renders border top color based on currentOption eg. Planned -> orange
-  const borderTopColoringTablet = (item: { status?: string }) => {
+  const borderTopColoringTablet = (item: any) => {
     let value = "suggestion-card-top";
     if (item.status === "planned") return "orange " + value;
     if (item.status === "in-progress") return "purple " + value;
@@ -65,7 +65,7 @@ const Roadmap = () => {
 
   // renders correct ::after pseudo element color for mobile
   const afterPseudoElementMobile = (item: { text: string }) => {
-    return width < 700 && item.text === currentSelect
+    return width < 768 && item.text === currentSelect
       ? `default active ${currentSelect.toLowerCase()}`
       : "default";
   };
@@ -81,10 +81,12 @@ const Roadmap = () => {
   const tester = () => {
     return (
       <div className="tester-container">
-        {Object.values(options).map((option) => (
-          <div>
-            {option.item.map((x: any) => (
-              <SuggestionCard item={x} page="roadmap" />
+        {Object.values(options).map((items) => (
+          <div className="column">
+            {items.item.map((item: any) => (
+              <div className={borderTopColoringTablet(item)}>
+                <SuggestionCard item={item} page="roadmap" />
+              </div>
             ))}
           </div>
         ))}
@@ -96,19 +98,21 @@ const Roadmap = () => {
 
   return (
     <>
-      <header className="roadmap-header">
-        <Link to="/feedbacks">
-          <img src={arrowLeft} alt="arrow-left" />
-          Go Back
-          <h2>Roadmap</h2>
-        </Link>
+      <div className="roadmap-header-wrapper">
+        <header className="roadmap-header">
+          <Link to="/feedbacks">
+            <img src={arrowLeft} alt="arrow-left" />
+            Go Back
+            <h2>Roadmap</h2>
+          </Link>
 
-        <Button
-          text="+ Add Feedback"
-          color="#AD1FEA"
-          link="/feedbacks/create"
-        />
-      </header>
+          <Button
+            text="+ Add Feedback"
+            color="#AD1FEA"
+            link="/feedbacks/create"
+          />
+        </header>
+      </div>
 
       <nav className="roadmap-second-header">
         <ul>
@@ -119,21 +123,21 @@ const Roadmap = () => {
               onClick={() => setCurrentSelect(item.text)}
             >
               {item.text} ({item.arrayLength})
-              {width > 700 && <p>{item.description}</p>}
+              {width > 768 && <p>{item.description}</p>}
             </li>
           ))}
         </ul>
       </nav>
 
       <main className="roadmap-main">
-        {width < 700 && renderMobileDescription()}
-        {width < 700 &&
+        {width < 768 && renderMobileDescription()}
+        {width < 768 &&
           array[0].item.map((item: any, index: number) => (
             <div className={borderTopColoringTablet(item)}>
               <SuggestionCard key={index} item={item} page="roadmap" />
             </div>
           ))}
-        {width > 700 && tester()}
+        {width > 768 && tester()}
       </main>
     </>
   );
