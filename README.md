@@ -46,17 +46,19 @@ Users should be able to:
 
 ### What I learned
 
-Coming soon...
+- TypeScript. I decided to pick up this language as it's important for web development in bigger projects. Its also highly liked language and it makes websites more reliable, less prone to bugs.
+- Redux Toolkit. I got more experience with it and I understand it way better now. Great for global state management. 
+- Sass. I didn't really deep dive into the mechanics of Sass, but I did use some of its core principles, e.g nested styling. 
+- Mobile-first workflow. Absolutely will use this in all future projects. With this strategy you dont stumble as much on creating media queries and being confused. 
 
-You can find the redux examples in in "src/redux/"
+You can find the redux examples in in "src/slices/dataSlice.ts"
 
 ### Continued development
 
-Coming soon...
+What are some of the things I could do better? 
 
-### Useful resources
-
-Coming soon...
+- Git Workflow. Smaller commits and more clear commit messages.
+- Learn more of TypeScript. First time I used TypeScript and I just dove into it without prior experience.
 
 ## Author
 
