@@ -100,7 +100,7 @@ const Roadmap = () => {
     <>
       <div className="roadmap-header-wrapper">
         <header className="roadmap-header">
-          <Link to="/feedbacks">
+          <Link to="/">
             <img src={arrowLeft} alt="arrow-left" />
             Go Back
             <h2>Roadmap</h2>

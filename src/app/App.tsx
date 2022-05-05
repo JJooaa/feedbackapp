@@ -14,7 +14,7 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/feedbacks" element={<Feedbacks />} />
+          <Route path="/" element={<Feedbacks />} />
           <Route path="/feedbacks/:id" element={<FeedbackDetail />} />
           <Route path="/feedbacks/create" element={<CreateFeedBack />} />
           <Route path="/roadmap" element={<Roadmap />} />
@@ -24,7 +24,7 @@ const App: React.FC = () => {
             element={
               <div>
                 Error!!
-                <Link to="/feedbacks">Go to feedbacks</Link>
+                <Link to="/">Go home</Link>
               </div>
             }
           />

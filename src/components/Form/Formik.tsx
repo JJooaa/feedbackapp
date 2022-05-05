@@ -68,7 +68,7 @@ const FormikForm: React.FC<Props> = ({ page, selectedItem }) => {
         })
       );
       setSubmitting(false);
-      navigate("/feedbacks");
+      navigate("/");
     }
     if (page === "edit") {
       dispatch(
@@ -80,7 +80,7 @@ const FormikForm: React.FC<Props> = ({ page, selectedItem }) => {
         })
       );
       setSubmitting(false);
-      navigate("/feedbacks");
+      navigate("/");
     }
   };
 
@@ -167,11 +167,11 @@ const FormikForm: React.FC<Props> = ({ page, selectedItem }) => {
               color="#AD1FEA"
               type="submit"
             />
-            <Button text="Cancel" link="/feedbacks" color="#3A4374" />
+            <Button text="Cancel" link="/" color="#3A4374" />
             {page === "edit" && (
               <Button
                 text="Delete"
-                link="/feedbacks"
+                link="/"
                 color="#D73737"
                 handleDelete={handleDelete}
               />

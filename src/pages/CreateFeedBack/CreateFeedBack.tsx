@@ -7,7 +7,7 @@ import FormikForm from "../../components/Form/Formik";
 const CreateFeedBack: React.FC = () => {
   return (
     <main className="create-feedback">
-      <Link to="/feedbacks">
+      <Link to="/">
         <img src={arrowLeft} alt="left pointing arrow" />
         Go Back
       </Link>

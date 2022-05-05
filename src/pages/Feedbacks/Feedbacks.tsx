@@ -100,7 +100,7 @@ const Feedbacks = () => {
   }
 
   // tablet and desktop header
-  function renderProgressiveHeader() {
+  function renderProgressiveSecondHeader() {
     return (
       <header className="feedbacks-second-header">
         {width > 768 && (
@@ -142,7 +142,7 @@ const Feedbacks = () => {
 
   return (
     <div className="feedbacks">
-      {isHamburgerOpen && (
+      {isHamburgerOpen && width < 768 && (
         <Menu
           setCurrentCategory={setCurrentCategory}
           currentCategory={currentCategory}
@@ -155,9 +155,9 @@ const Feedbacks = () => {
         />
       )}
       {width < 768 && renderMobileHeader()}
-      {width < 768 && renderProgressiveHeader()}
+      {width < 768 && renderProgressiveSecondHeader()}
       <main className="feedbacks-content-main">
-        {width > 768 && renderProgressiveHeader()}
+        {width > 768 && renderProgressiveSecondHeader()}
         {data.length !== 0 ? (
           handleCategoryChange().map((item: any) => (
             <SuggestionCard key={item.id} item={item} page="feedbacks" />

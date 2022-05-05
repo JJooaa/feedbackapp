@@ -12,7 +12,7 @@ const EditFeedback = () => {
 
   return (
     <main className="create-feedback">
-      <Link to="/feedbacks">
+      <Link to="/">
         <img src={arrowLeft} alt="left pointing arrow" />
         Go Back
       </Link>

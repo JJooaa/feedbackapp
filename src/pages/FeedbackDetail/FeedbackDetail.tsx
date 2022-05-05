@@ -21,7 +21,7 @@ const FeedbackDetail = () => {
         <header className="detail-header">
           <div>
             <img src={arrowLeft} alt="arrow-left" />
-            <Link to="/feedbacks">Go Back</Link>
+            <Link to="/">Go Back</Link>
           </div>
           <Button
             text="Edit Feedback"
