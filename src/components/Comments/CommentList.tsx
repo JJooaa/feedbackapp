@@ -20,7 +20,6 @@ interface Props {
 }
 
 const CommentList = ({ comment }: Props) => {
-  console.log(comment);
   return (
     <>
       <div className="comments-wrapper">

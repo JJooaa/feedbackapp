@@ -24,7 +24,7 @@ const Roadmap = () => {
     (item: { status?: string }) => item.status === "live"
   );
 
-  // based on currentSelect prop we decide which of the array to render
+  // based on currentSelect state we decide which of the array to render
   // and we have the necessary setup properties based on objects
   const options = [
     {
@@ -47,13 +47,8 @@ const Roadmap = () => {
     },
   ];
 
-  // return options.item based on (currentSelect === "Planned") ->  {
-  //   text: "Planned",
-  //   number: planned.length,
-  //   description: "Ideas prioritized for research",
-  //   item: planned,
-  // },
-  const array = options.filter((item) => currentSelect === item.text);
+  // from options.text === currentSelect -> currentArray
+  const currentArray = options.filter((item) => currentSelect === item.text);
 
   // renders border top color based on currentOption eg. Planned -> orange
   const borderTopColoringTablet = (item: any) => {
@@ -65,7 +60,7 @@ const Roadmap = () => {
 
   // renders correct ::after pseudo element color for mobile
   const afterPseudoElementMobile = (item: { text: string }) => {
-    return width < 768 && item.text === currentSelect
+    return width < 767 && item.text === currentSelect
       ? `default active ${currentSelect.toLowerCase()}`
       : "default";
   };
@@ -73,14 +68,15 @@ const Roadmap = () => {
   const renderMobileDescription = () => {
     return (
       <div className="array-description">
-        {array[0].text} ({array[0].arrayLength})<p>{array[0].description}</p>
+        {currentArray[0].text} ({currentArray[0].arrayLength})
+        <p>{currentArray[0].description}</p>
       </div>
     );
   };
 
-  const tester = () => {
+  const renderColumns = () => {
     return (
-      <div className="tester-container">
+      <>
         {Object.values(options).map((items) => (
           <div className="column">
             {items.item.map((item: any) => (
@@ -90,29 +86,25 @@ const Roadmap = () => {
             ))}
           </div>
         ))}
-      </div>
+      </>
     );
   };
 
-  tester();
-
   return (
-    <>
-      <div className="roadmap-header-wrapper">
-        <header className="roadmap-header">
-          <Link to="/">
-            <img src={arrowLeft} alt="arrow-left" />
-            Go Back
-            <h2>Roadmap</h2>
-          </Link>
+    <div className="roadmap-wrapper">
+      <header className="roadmap-header">
+        <Link to="/">
+          <img src={arrowLeft} alt="arrow-left" />
+          Go Back
+          <h2>Roadmap</h2>
+        </Link>
 
-          <Button
-            text="+ Add Feedback"
-            color="#AD1FEA"
-            link="/feedbacks/create"
-          />
-        </header>
-      </div>
+        <Button
+          text="+ Add Feedback"
+          color="#AD1FEA"
+          link="/feedbacks/create"
+        />
+      </header>
 
       <nav className="roadmap-second-header">
         <ul>
@@ -130,16 +122,16 @@ const Roadmap = () => {
       </nav>
 
       <main className="roadmap-main">
-        {width < 768 && renderMobileDescription()}
-        {width < 768 &&
-          array[0].item.map((item: any, index: number) => (
+        {width < 767 && renderMobileDescription()}
+        {width < 767 &&
+          currentArray[0].item.map((item: any, index: number) => (
             <div className={borderTopColoringTablet(item)}>
               <SuggestionCard key={index} item={item} page="roadmap" />
             </div>
           ))}
-        {width > 768 && tester()}
+        {width > 767 && renderColumns()}
       </main>
-    </>
+    </div>
   );
 };
 

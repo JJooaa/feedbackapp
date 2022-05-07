@@ -2,7 +2,7 @@ import React from "react";
 import "./FeedbackCard.scss";
 import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
 import commentsIcon from "../../assets/shared/icon-comments.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
 import {
   upvotePost,
@@ -29,6 +29,7 @@ interface Props {
 const FeedbackCard: React.FC<Props> = ({ item, page }) => {
   const { width } = useWindowSize();
   const dispatch = useAppDispatch();
+  let navigate = useNavigate();
 
   const upvotes = useAppSelector((state) => state.data.user.upvotes);
 
@@ -48,6 +49,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     return [firstLetter, ...array.slice(1, array.length)].join("");
   };
 
+  // handles the colored dot on the roadmap page
   const handleDot = () => {
     if (item.status === "planned") {
       return "dot orange-d";
@@ -60,6 +62,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     }
   };
 
+  // mobile version of the feedbackcard, also render this is all across roadmap
   const renderMobileVersion = () => {
     return (
       <>
@@ -70,7 +73,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
           </li>
         )}
         <div className="info-texts">
-          <Link to={`/feedbacks/${item.id}`}>{item.title}</Link>
+          {item.title}
           <p>{item.description}</p>
         </div>
         <div className="bubble">
@@ -95,11 +98,12 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     );
   };
 
+  // feedbackcard for tablet and above
   const renderResponsiveVersion = () => {
     return (
       <>
         <div className="info-texts">
-          <Link to={`/feedbacks/${item.id}`}>{item.title}</Link>
+          {item.title}
           <p>{item.description}</p>
           <div className="bubble">
             <h2>{firstLetterToUpperCase(item.category)}</h2>
@@ -122,10 +126,11 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
     );
   };
 
+  // if the page is roadmap we wanna have the mobile version of the feedbackcard
   const renderFeedbackCard = () => {
     if (page === "roadmap") return renderMobileVersion();
-    if (width > 768) return renderResponsiveVersion();
-    if (width < 768) return renderMobileVersion();
+    if (width > 767) return renderResponsiveVersion();
+    if (width < 767) return renderMobileVersion();
   };
 
   return (
@@ -133,6 +138,7 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
       className={
         page !== "roadmap" ? "feedbackcard responsive" : "feedbackcard"
       }
+      onClick={() => navigate(`/feedbacks/${item.id}`)}
     >
       {renderFeedbackCard()}
     </div>

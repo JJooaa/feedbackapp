@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: flex-end;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     position: initial;
     margin-top: 32px;
     background: none;
@@ -27,7 +27,7 @@
     flex-direction: column;
     padding: 24px;
     gap: 20px;
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 767px) {
       flex-direction: row;
       width: 100%;
       justify-content: center;

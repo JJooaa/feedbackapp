@@ -6,17 +6,17 @@
   background-color: #373f68;
   padding: 27px 32px;
   margin: 0 auto;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     height: 113px;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     margin-top: 78px;
     border-radius: 10px;
   }
 
   h2 {
     font-size: 18px;
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 767px) {
       font-size: 24px;
     }
   }
@@ -30,7 +30,7 @@
     font-size: 13px;
     color: white;
     text-decoration: none;
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 767px) {
       font-size: 15px;
     }
   }
@@ -41,14 +41,16 @@
   border-bottom: 1px solid #8c92b345;
   max-width: 1100px;
   margin: 0 auto;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     border: none;
-    padding: 30px 40px 16px 40px;
+    margin: 20px auto;
   }
 
   ul {
     display: flex;
     list-style-type: none;
+    justify-content: space-between;
+    gap: 25px;
 
     .default {
       opacity: 40%;
@@ -59,7 +61,8 @@
       font-size: 13px;
       color: #3a4374;
       position: relative;
-      @media screen and (min-width: 768px) {
+      width: 33%;
+      @media screen and (min-width: 767px) {
         font-size: 15px;
         opacity: 100%;
         text-align: left;
@@ -99,9 +102,9 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 767px) {
     margin: 0 auto;
-    padding: 0px 40px;
+    flex-direction: row;
   }
 }
 
@@ -141,16 +144,20 @@
   display: flex;
   gap: 10px;
 
-  @media screen and (min-width: 1000px) {
-    gap: 30px;
-  }
   .feedbackcard {
     margin-bottom: 15px;
   }
 }
 
-.roadmap-header-wrapper {
-  @media screen and (min-width: 768px) {
+.column {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.roadmap-wrapper {
+  @media screen and (min-width: 767px) {
     padding: 0px 20px;
   }
 }

@@ -7,7 +7,7 @@ import Button from "../../components/Button/Button";
 import { ReactComponent as DownArrow } from "../../assets/shared/icon-arrow-down.svg";
 import { ReactComponent as UpArrow } from "../../assets/shared/icon-arrow-up.svg";
 import Empty from "../../components/Empty/Empty";
-import SuggestionCard from "../../components/FeedbackCard/FeedbackCard";
+import FeedbackCard from "../../components/FeedbackCard/FeedbackCard";
 import OptionList from "../../components/OptionList/OptionList";
 import { useWindowSize } from "usehooks-ts";
 import { useAppSelector } from "../../slices/dataSlice";
@@ -33,9 +33,12 @@ const Feedbacks = () => {
 
   function onHamburgerClick() {
     setHamburgerIsOpen((prevState) => !prevState);
+    !isHamburgerOpen
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "initial");
   }
 
-  function handleIsOpen() {
+  function handleIsSortByOpen() {
     setIsSortByOpen((prevState) => !prevState);
   }
 
@@ -103,7 +106,7 @@ const Feedbacks = () => {
   function renderProgressiveSecondHeader() {
     return (
       <header className="feedbacks-second-header">
-        {width > 768 && (
+        {width > 767 && (
           <h2>
             <Bulb />
             {handleCategoryChange().length} Suggestions
@@ -111,7 +114,7 @@ const Feedbacks = () => {
         )}
         <p>
           Sort by :
-          <span onClick={handleIsOpen}>
+          <span onClick={handleIsSortByOpen}>
             {currentOption}
             {isSortByOpen === false ? (
               <DownArrow stroke="white" />
@@ -124,7 +127,7 @@ const Feedbacks = () => {
         {isSortByOpen && (
           <OptionList
             array={options}
-            handleIsOpen={handleIsOpen}
+            handleIsOpen={handleIsSortByOpen}
             page="feedbacks"
             currentOption={currentOption}
             setCurrentOption={setCurrentOption}
@@ -142,25 +145,25 @@ const Feedbacks = () => {
 
   return (
     <div className="feedbacks">
-      {isHamburgerOpen && width < 768 && (
+      {isHamburgerOpen && width < 767 && (
         <Menu
           setCurrentCategory={setCurrentCategory}
           currentCategory={currentCategory}
         />
       )}
-      {width > 768 && (
+      {width > 767 && (
         <Menu
           setCurrentCategory={setCurrentCategory}
           currentCategory={currentCategory}
         />
       )}
-      {width < 768 && renderMobileHeader()}
-      {width < 768 && renderProgressiveSecondHeader()}
+      {width < 767 && renderMobileHeader()}
+      {width < 767 && renderProgressiveSecondHeader()}
       <main className="feedbacks-content-main">
-        {width > 768 && renderProgressiveSecondHeader()}
+        {width > 767 && renderProgressiveSecondHeader()}
         {data.length !== 0 ? (
           handleCategoryChange().map((item: any) => (
-            <SuggestionCard key={item.id} item={item} page="feedbacks" />
+            <FeedbackCard key={item.id} item={item} page="feedbacks" />
           ))
         ) : (
           <Empty />
