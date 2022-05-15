@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Github Repository: [GitHub](https://github.com/JJooaa/feedbackapp)
-- Live Site URL: [Feedback App] Coming soon.
+- Live Site URL: [Feedback App](https://dashing-mermaid-aeb20b.netlify.app/)
 
 ## My process
 
