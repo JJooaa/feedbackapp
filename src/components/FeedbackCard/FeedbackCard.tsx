@@ -81,7 +81,10 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
         </div>
         <div className="mobile-wrapper">
           <div
-            onClick={() => dispatch(upvotePost(Number(item.id)))}
+            onClick={(e) => {
+              dispatch(upvotePost(Number(item.id)));
+              e.stopPropagation();
+            }}
             className={
               handleHasUpvoted("number") + "info-container bubble upvote"
             }
@@ -110,7 +113,10 @@ const FeedbackCard: React.FC<Props> = ({ item, page }) => {
           </div>
         </div>
         <div
-          onClick={() => dispatch(upvotePost(Number(item.id)))}
+          onClick={(e) => {
+            dispatch(upvotePost(Number(item.id)));
+            e.stopPropagation();
+          }}
           className={
             handleHasUpvoted("number") + "info-container bubble order1 upvote"
           }
