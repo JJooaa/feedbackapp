@@ -67,19 +67,19 @@ const dataSlice = createSlice({
     postReply: (
       state,
       action: PayloadAction<{
-        id: number;
+        id?: number;
         content: string;
         commentId: number;
         replyingTo: string;
+        parentId?: number;
       }>
     ) => {
       // id is the url/id which corresponds to currentPost | commentId is the clicked comment inside the currentPost
-      const { id, content, commentId, replyingTo } = action.payload;
+      const { id, content, commentId, replyingTo, parentId } = action.payload;
       const currentPost = state.value.find((post: any) => post.id === id);
       const clickedComment = currentPost.comments.find(
-        (item: any) => item.id === commentId
+        (item: any) => item.id === commentId || item.id === parentId
       );
-      console.log(current(clickedComment));
 
       const newReply = {
         content: content,

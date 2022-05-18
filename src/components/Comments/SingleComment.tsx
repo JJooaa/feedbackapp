@@ -17,9 +17,10 @@ interface Props {
       content: string;
     }[];
   };
+  parentId?: number;
 }
 
-const SingleComment: React.FC<Props> = ({ props, children }) => {
+const SingleComment: React.FC<Props> = ({ props, children, parentId }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
 
   const handleReplyClick = (): void => {
@@ -49,7 +50,11 @@ const SingleComment: React.FC<Props> = ({ props, children }) => {
         {props.content}
       </p>
       {isReplying && (
-        <PostReply props={props} handleReplyClick={handleReplyClick} />
+        <PostReply
+          props={props}
+          parentId={parentId}
+          handleReplyClick={handleReplyClick}
+        />
       )}
       {props.replies && <div className="replies-container">{children}</div>}
     </div>

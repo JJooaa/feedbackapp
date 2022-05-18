@@ -29,7 +29,7 @@ const CommentList = ({ comment }: Props) => {
             <SingleComment key={index} props={item}>
               {item.replies &&
                 item.replies.map((reply: any, idx) => (
-                  <SingleComment key={idx} props={reply}></SingleComment>
+                  <SingleComment key={idx} parentId={item.id} props={reply} />
                 ))}
             </SingleComment>
           ))}

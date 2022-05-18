@@ -20,19 +20,20 @@ interface Props {
     }[];
   };
   handleReplyClick: () => void;
+  parentId?: number;
 }
 
-const PostReply: React.FC<Props> = ({ props, handleReplyClick }) => {
+const PostReply: React.FC<Props> = ({ props, handleReplyClick, parentId }) => {
   const { id } = useParams();
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
   const [value, setValue] = useState("");
 
-  console.log(props);
   const addPost = () => {
     dispatch(
       postReply({
         id: Number(id),
+        parentId: parentId,
         content: value,
         commentId: props.id,
         replyingTo: props.user.username,
