@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Github Repository: [GitHub](https://github.com/JJooaa/feedbackapp)
-- Live Site URL: [Feedback App](https://nimble-biscochitos-9501fc.netlify.app/)
+- Live Site URL: [Feedback App](https://cerulean-manatee-12afa4.netlify.app/)
 
 ## My process
 
