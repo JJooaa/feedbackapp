@@ -28,6 +28,7 @@ const PostReply: React.FC<Props> = ({ props, handleReplyClick }) => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState("");
 
+  console.log(props);
   const addPost = () => {
     dispatch(
       postReply({
@@ -44,7 +45,6 @@ const PostReply: React.FC<Props> = ({ props, handleReplyClick }) => {
     textAreaRef.current?.focus();
   }, []);
 
-  console.log(props.id);
   return (
     <div>
       <textarea
